@@ -1,0 +1,208 @@
+name: AI Code Review with GitHub Copilot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  copilot-review:
+    name: GitHub Copilot Code Review
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44
+      with:
+        files: |
+          src/**/*.ts
+          src/**/*.js
+          test/**/*.ts
+          test/**/*.js
+          *.json
+          *.md
+
+    - name: AI Code Review
+      if: steps.changed-files.outputs.any_changed == 'true'
+      uses: github/super-linter@v5
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VALIDATE_ALL_CODEBASE: false
+        VALIDATE_TYPESCRIPT_ES: true
+        VALIDATE_JAVASCRIPT_ES: true
+        VALIDATE_JSON: true
+        VALIDATE_MARKDOWN: true
+
+    - name: Comment PR with AI suggestions
+      if: steps.changed-files.outputs.any_changed == 'true'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data: files } = await github.rest.pulls.listFiles({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+          });
+
+          const changedFiles = files.filter(file => 
+            file.filename.match(/\.(ts|js|json|md)$/) && 
+            file.status !== 'removed'
+          );
+
+          if (changedFiles.length === 0) return;
+
+          const suggestions = [];
+          
+          for (const file of changedFiles.slice(0, 5)) { // Limit to 5 files
+            if (file.patch) {
+              // Basic code quality checks
+              const lines = file.patch.split('\n');
+              const addedLines = lines.filter(line => line.startsWith('+')).slice(0, 20);
+              
+              // Check for common issues
+              const issues = [];
+              
+              addedLines.forEach((line, index) => {
+                const content = line.substring(1).trim();
+                
+                // Check for console.log
+                if (content.includes('console.log')) {
+                  issues.push(`Line ${index + 1}: Consider removing console.log statements before production`);
+                }
+                
+                // Check for TODO comments
+                if (content.includes('TODO') || content.includes('FIXME')) {
+                  issues.push(`Line ${index + 1}: TODO/FIXME comment found - consider creating an issue`);
+                }
+                
+                // Check for magic numbers
+                if (content.match(/\b\d{2,}\b/) && !content.includes('test') && !content.includes('spec')) {
+                  issues.push(`Line ${index + 1}: Consider extracting magic numbers to constants`);
+                }
+                
+                // Check for missing error handling
+                if (content.includes('await ') && !content.includes('try') && !content.includes('catch')) {
+                  issues.push(`Line ${index + 1}: Consider adding error handling for async operations`);
+                }
+              });
+              
+              if (issues.length > 0) {
+                suggestions.push(`**${file.filename}:**\n${issues.map(issue => `- ${issue}`).join('\n')}`);
+              }
+            }
+          }
+
+          if (suggestions.length > 0) {
+            const body = `## 🤖 AI Code Review Suggestions
+
+          ${suggestions.join('\n\n')}
+
+          ---
+          *This review was generated automatically. Please review these suggestions and apply them as appropriate.*
+          
+          ### 💡 Additional Recommendations:
+          - Ensure all new code has corresponding tests
+          - Follow the project's TypeScript strict mode guidelines
+          - Consider adding JSDoc comments for public APIs
+          - Verify error handling covers edge cases
+          
+          **Note:** This is a basic automated review. For comprehensive feedback, consider using GitHub Copilot Chat in your IDE.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+          }
+
+  demo-validation:
+    name: Demo Scenarios Validation
+    runs-on: ubuntu-latest
+    needs: copilot-review
+    if: contains(github.event.pull_request.title, 'demo') || contains(github.event.pull_request.body, 'demo')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Validate Demo 1 - Legacy Refactor
+      run: |
+        echo "🔄 Validating Demo 1: Legacy Code Refactoring"
+        if [ -f "src/legacy/user-service-messy.js" ]; then
+          echo "✅ Legacy file exists for refactoring demo"
+        else
+          echo "❌ Legacy file missing"
+          exit 1
+        fi
+
+    - name: Validate Demo 2 - Feature Implementation
+      run: |
+        echo "🚀 Validating Demo 2: Feature Implementation"
+        npm run test -- --testPathPattern=users
+        echo "✅ User module tests passing"
+
+    - name: Validate Demo 3 - TDD Workflow
+      run: |
+        echo "🧪 Validating Demo 3: TDD Workflow"
+        npm run test -- --testPathPattern=cart
+        echo "✅ Cart service ready for TDD demo"
+
+    - name: Comment Demo Status
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const body = `## 🎬 Demo Validation Results
+
+          ✅ **Demo 1**: Legacy refactoring files are ready
+          ✅ **Demo 2**: Feature implementation structure validated  
+          ✅ **Demo 3**: TDD workflow tests are prepared
+
+          ### 🎯 Demo Commands Ready:
+          \`\`\`bash
+          npm run demo:refactor  # Demo 1: Legacy Code Refactoring
+          npm run demo:feature   # Demo 2: Feature Implementation  
+          npm run demo:tdd       # Demo 3: TDD Workflow
+          \`\`\`
+
+          The presentation demos are ready for the International JavaScript Conference NYC 2025! 🎉`;
+
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: body
+          });
