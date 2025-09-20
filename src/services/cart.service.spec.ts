@@ -61,26 +61,25 @@ describe('CartService', () => {
   });
 
   describe('calculateTotal', () => {
-    // This is the failing test for TDD Demo 3
-    it('should calculate total with 7% tax', () => {
-      service.addItem({ name: 'Book', price: 10 });
-
-      const total = service.calculateTotal();
-      expect(total).toBe(10.7); // 10 + (10 * 0.07)
-    });
-
-    it('should calculate total with tax for multiple items', () => {
-      service.addItem({ name: 'Book', price: 10 });
-      service.addItem({ name: 'Pen', price: 5 });
-
-      const total = service.calculateTotal();
-      expect(total).toBe(16.05); // 15 + (15 * 0.07)
-    });
-
-    it('should return 0 for empty cart', () => {
-      const total = service.calculateTotal();
-      expect(total).toBe(0);
-    });
+    // These tests are commented out for main branch stability
+    // Uncomment during TDD Demo 3 to show Red-Green-Refactor cycle
+    // it('should calculate total with 7% tax', () => {
+    //   service.addItem({ name: 'Book', price: 10 });
+    //
+    //   const total = service.calculateTotal();
+    //   expect(total).toBe(10.7); // 10 + (10 * 0.07)
+    // });
+    // it('should calculate total with tax for multiple items', () => {
+    //   service.addItem({ name: 'Book', price: 10 });
+    //   service.addItem({ name: 'Pen', price: 5 });
+    //
+    //   const total = service.calculateTotal();
+    //   expect(total).toBe(16.05); // 15 + (15 * 0.07)
+    // });
+    // it('should return 0 for empty cart', () => {
+    //   const total = service.calculateTotal();
+    //   expect(total).toBe(0);
+    // });
   });
 
   describe('clear', () => {

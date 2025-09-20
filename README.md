@@ -25,20 +25,19 @@ This project demonstrates AI-accelerated Node.js development patterns for the In
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
-npm install
-
-# Validate demo setup
-npm run demo:validate
-
-# Run all tests
-npm run test
+# Complete demo environment setup
+npm run demo:setup
 
 # Start development server
 npm run start:dev
 
-# Open Swagger documentation
+# Open Swagger documentation (in new terminal)
 open http://localhost:3000/api
+
+# Run individual demo scenarios
+npm run demo:refactor  # Demo 1: Legacy refactoring
+npm run demo:feature   # Demo 2: Feature implementation
+npm run demo:tdd       # Demo 3: TDD workflow
 ```
 
 ## 🤖 AI-Powered Development
@@ -95,8 +94,8 @@ ny-node-ai-presentation/
 ## 🎬 Live Demo Commands
 
 ```bash
-# Validate all demos are ready
-npm run demo:validate
+# Setup complete demo environment
+npm run demo:setup
 
 # Demo 1: Legacy Code Refactoring
 npm run demo:refactor
@@ -104,12 +103,16 @@ npm run demo:refactor
 # Demo 2: Feature Implementation with MCP
 npm run demo:feature
 
-# Demo 3: TDD with AI Acceleration
+# Demo 3: TDD with AI Acceleration (uncomment tests first!)
 npm run demo:tdd
 
 # Run all demos in sequence
 npm run demo:all
 ```
+
+### 🎯 Demo Preparation Notes
+
+**Demo 3 Setup**: Before running the TDD demo, uncomment the failing tests in `src/services/cart.service.spec.ts` (lines 66-82) to demonstrate the Red-Green-Refactor cycle.
 
 ## 🔄 CI/CD Pipeline
 

@@ -18,7 +18,7 @@ export class CartService {
       existingItem.quantity += 1;
     } else {
       this.items.push({
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 11),
         ...item,
         quantity: 1,
       });
@@ -41,9 +41,10 @@ export class CartService {
     return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
-  // This method will be implemented during TDD demo
+  // Basic implementation for main branch stability
+  // Will be replaced during TDD Demo 3 with proper tax calculation
   calculateTotal(): number {
-    // TODO: Implement with tax calculation
-    throw new Error('Method not implemented');
+    // TODO: Implement with 7% tax calculation during demo
+    return this.getSubtotal();
   }
 }

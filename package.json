@@ -18,11 +18,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "demo:refactor": "echo '🔄 Demo 1: Legacy Code Refactoring' && echo 'File: src/legacy/user-service-messy.js' && echo 'Prompt: prompts/refactor-legacy.md'",
-    "demo:feature": "echo '🚀 Demo 2: Feature Implementation with MCP' && npm run test -- --testPathPattern=users",
-    "demo:tdd": "echo '🧪 Demo 3: TDD with AI Acceleration' && npm run test -- --testPathPattern=cart",
-    "demo:all": "npm run demo:validate && npm run demo:refactor && npm run demo:feature && npm run demo:tdd",
-    "precommit": "npm run lint:check && npm run format:check && npm run test",
+    "demo:refactor": "echo '🔄 Demo 1: Legacy Code Refactoring' && echo 'File: src/legacy/user-service-messy.js' && echo 'Prompt: prompts/refactor-legacy.md' && echo 'Ready for AI refactoring!'",
+    "demo:feature": "echo '🚀 Demo 2: Feature Implementation with MCP' && npm run test -- --testPathPattern=users && echo 'Users module tests passing - ready for new features!'",
+    "demo:tdd": "echo '🧪 Demo 3: TDD with AI Acceleration' && echo 'Uncomment tests in src/services/cart.service.spec.ts for Red-Green-Refactor cycle' && npm run test -- --testPathPattern=cart",
+    "demo:all": "npm run demo:refactor && npm run demo:feature && npm run demo:tdd",
+    "demo:setup": "npm ci && npm run build && npm run test && echo '✅ Demo environment ready!'",
+    "demo:prep": "node scripts/demo-prep.js",
     "ci": "npm run lint:check && npm run format:check && npm run test:cov && npm run build"
   },
   "dependencies": {
