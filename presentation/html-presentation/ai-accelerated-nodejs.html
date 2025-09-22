@@ -106,6 +106,58 @@
         box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
       }
 
+      /* Enhanced styles for AI tool slides */
+      .tool-logo-container {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tool-logo-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Enhanced bullet point styling */
+      .enhanced-bullet-point {
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        padding-left: 1rem;
+      }
+
+      .enhanced-bullet-point:hover {
+        border-left-color: rgba(34, 197, 94, 0.6);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+      }
+
+      /* Icon bullet point layout classes */
+      .icon-bullet-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .icon-bullet-container {
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .icon-bullet-icon {
+        font-size: 2.25rem; /* text-4xl equivalent */
+      }
+
+      .icon-bullet-content {
+        display: flex;
+        align-items: center;
+        min-height: 4rem;
+      }
+
       /* Slide Container */
       .slide {
         min-height: 100vh;
@@ -123,6 +175,10 @@
         display: flex;
       }
 
+      /* Hide archived slides */
+      .slide-archived { display: none !important; }
+
+
       .slide-content {
         max-width: 1200px;
         width: 100%;
@@ -135,7 +191,7 @@
 
       .slide-header {
         flex-shrink: 0;
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
       }
 
       .slide-body {
@@ -280,7 +336,7 @@
       .slide-subtitle {
         font-size: 1.75rem;
         color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
         line-height: 1.6;
       }
 
@@ -297,6 +353,18 @@
 
       .content-grid.grid-3 {
         grid-template-columns: repeat(3, 1fr);
+      }
+
+      /* Fix encoding artifacts on Pitfalls slide by replacing text via CSS */
+      #slide-pitfalls h2.slide-title { font-size: 0 !important; }
+      #slide-pitfalls h2.slide-title::after {
+        content: "AI Isn't Magic \2013  The Pitfalls";
+        font-size: 3rem; font-weight: 700; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      }
+      #slide-pitfalls .card-solid.p-4.mt-6 p { font-size: 0 !important; }
+      #slide-pitfalls .card-solid.p-4.mt-6 p::after {
+        content: "YOU: Verify \00B7  Diff \00B7  Test \00B7  Document";
+        font-size: 1rem; color: #1a1a1a;
       }
 
       .content-grid.grid-4 {
@@ -586,6 +654,10 @@
           <a href="#slide-10" class="nav-dot" data-slide="10">10</a>
           <a href="#slide-11" class="nav-dot" data-slide="11">11</a>
           <a href="#slide-12" class="nav-dot" data-slide="12">12</a>
+          <a href="#slide-13" class="nav-dot" data-slide="13">13</a>
+          <a href="#slide-14" class="nav-dot" data-slide="14">14</a>
+          <a href="#slide-15" class="nav-dot" data-slide="15">15</a>
+          <a href="#slide-16" class="nav-dot" data-slide="16">16</a>
         </div>
       </div>
     </div>
@@ -883,93 +955,190 @@
       </div>
     </section>
 
-    <!-- Slide 6: AI for Project Kickstarts -->
+    <!-- Slide 6: AI-Powered Project Genesis -->
     <section class="slide" id="slide-6">
       <div class="slide-content">
-        <h2 class="slide-title">AI for Project Kickstarts</h2>
+        <h2 class="slide-title">AI-Powered Project Genesis</h2>
         <p class="slide-subtitle">
-          One-prompt boilerplate via Lovable, bolt.new, v0, Replit - iterate with prompt engineering
+          Harmony: AI helps create the foundation – Engineers expand and iterate
         </p>
 
-        <div class="text-center mb-8">
-          <div class="card-icon card-icon-accent">
-            <i class="fas fa-rocket text-6xl"></i>
-          </div>
-        </div>
-
-        <div class="content-grid grid-3">
-          <div class="card-solid">
-            <div class="card-icon card-icon-primary">
-              <i class="fas fa-layer-group"></i>
-            </div>
-            <h3 class="card-title-dark">Project Structures</h3>
-            <p class="card-text-dark">
-              Generate complete scaffolding with best practices
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-cubes"></i>
-            </div>
-            <h3 class="card-title-dark">Architecture Patterns</h3>
-            <p class="card-text-dark">
-              Implement modular, scalable, and maintainable patterns
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-brain"></i>
-            </div>
-            <h3 class="card-title-dark">Focus on Logic</h3>
-            <p class="card-text-dark">
-              Domain logic over infrastructure plumbing
-            </p>
-
-    <!-- Slide 7 (New): Configure Your Tools Right -->
-    <section class="slide" id="slide-7-config">
-      <div class="slide-content">
-        <h2 class="slide-title">Configure Your Tools Right</h2>
-        <p class="slide-subtitle">Guidelines • MCP • Prompt Enhancement • Context</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <!-- Creative Layout: Split design with logos on left, content on right -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
+          <!-- Left side: Tool logos -->
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-blue-300 mb-4"><i class="fab fa-github mr-2"></i>GitHub Copilot</h3>
-            <div class="space-y-3">
-              <div class="card-solid"><p class="card-text-dark">Set repo prompts: coding standards, frameworks, naming</p></div>
-              <div class="card-solid"><p class="card-text-dark">Enable PR review with required checks</p></div>
-              <div class="card-solid"><p class="card-text-dark">Provide context: README, ADRs, architecture map</p></div>
-              <div class="card-solid"><p class="card-text-dark">Review diffs, accept surgically</p></div>
+            <h3 class="text-2xl font-bold text-white mb-6 text-center">
+              <i class="fas fa-magic mr-3 text-green-400"></i>AI VIBE Coding Tools
+            </h3>
+            <div class="grid grid-cols-2 gap-6">
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/lovable-logo.jpg" alt="Lovable" class="w-12 h-12 mb-2">
+                <span class="text-white font-medium">Lovable.dev</span>
+              </div>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/bolt-logo.jpeg" alt="Bolt.new" class="w-12 h-12 mb-2">
+                <span class="text-white font-medium">Bolt.new</span>
+              </div>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/v0-dev.png" alt="v0" class="w-12 h-12 mb-2">
+                <span class="text-white font-medium">V0.dev</span>
+              </div>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/replit-logo.svg" alt="Replit" class="w-12 h-12 mb-2">
+                <span class="text-white font-medium">Replit.com</span>
+              </div>
             </div>
           </div>
 
+          <!-- Right side: Key messaging -->
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-green-300 mb-4"><i class="fas fa-robot mr-2"></i>Augment</h3>
-            <div class="space-y-3">
-              <div class="card-solid"><p class="card-text-dark">MCP: enable project context, feedback loop</p></div>
-              <div class="card-solid"><p class="card-text-dark">Prompt enhancement: definitions of done, constraints</p></div>
-              <div class="card-solid"><p class="card-text-dark">Task planning: tests, security, docs, CI hooks</p></div>
-              <div class="card-solid"><p class="card-text-dark">Audit trail: trace suggestions to commits</p></div>
+            <h3 class="text-2xl font-bold text-green-300 mb-6">
+              <i class="fas fa-seedling mr-3"></i>The Power of Prompt Engineering
+            </h3>
+            <div class="space-y-6">
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-primary">
+                  <i class="fas fa-bolt icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-lg font-semibold text-white mb-2">Generate full boilerplate projects in one prompt</h4>
+                  <p class="text-gray-300">Complete project structures with routing, components, and styling</p>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-secondary">
+                  <i class="fas fa-expand-arrows-alt icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-lg font-semibold text-white mb-2">Expand prompts iteratively for design & architecture</h4>
+                  <p class="text-gray-300">Refine and enhance your vision through conversational iteration</p>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-tertiary">
+                  <i class="fas fa-rocket icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-lg font-semibold text-white mb-2">Create strong foundations for scaling</h4>
+                  <p class="text-gray-300">Transition seamlessly from prototype to production-ready code</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-          </div>
-        </div>
-
-        <div class="card-solid p-4 mt-6">
+        <!-- Bottom call-to-action -->
+        <div class="card-solid p-4 mt-8">
           <p class="text-center text-black">
-            Iterate prompts: clarify domain, constraints, and acceptance criteria to converge on the right foundations.
+            <i class="fas fa-lightbulb text-yellow-600 mr-2"></i>
+            Start with AI VIBE coding, then scale with properly configured AI agents
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: AI for Refactoring Legacy Code -->
+    <!-- Slide 7: Choose + Configure Your Tools -->
     <section class="slide" id="slide-7">
+      <div class="slide-content">
+        <h2 class="slide-title">Choose + Configure Your Tools</h2>
+        <p class="slide-subtitle">Configuration is critical for AI coding success</p>
+
+        <!-- Creative Layout: Logos on left, enhanced content on right -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <!-- Left side: Tool logos prominently displayed -->
+          <div class="glass-strong p-6">
+            <h3 class="text-xl font-bold text-white mb-6 text-center">
+              <i class="fas fa-tools mr-2 text-blue-400"></i>AI Coding Tools
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/copilot-logo.png" alt="GitHub Copilot" class="w-8 h-8">
+                <span class="text-white font-medium">GitHub Copilot</span>
+              </div>
+              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/cursor-logo.png" alt="Cursor" class="w-8 h-8">
+                <span class="text-white font-medium">Cursor</span>
+              </div>
+              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/claude-logo.png" alt="Claude" class="w-8 h-8">
+                <span class="text-white font-medium">Claude</span>
+              </div>
+              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/augment-logo.png" alt="Augment" class="w-8 h-8">
+                <span class="text-white font-medium">Augment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right side: Enhanced configuration bullet points -->
+          <div class="md:col-span-2 glass-strong p-8">
+            <h3 class="text-2xl font-bold text-blue-300 mb-6">
+              <i class="fas fa-cogs mr-3"></i>Essential Configuration Steps
+            </h3>
+            <div class="space-y-6">
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-primary">
+                  <i class="fas fa-file-alt icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-xl font-semibold text-white">Set codebase prompts & standards (README/ADRs)</h4>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-secondary">
+                  <i class="fas fa-brain icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-xl font-semibold text-white">Select appropriate models (GPT/Claude)</h4>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-tertiary">
+                  <i class="fas fa-search icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-xl font-semibold text-white">Leverage codebase indexing and file context</h4>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-accent">
+                  <i class="fas fa-plug icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-xl font-semibold text-white">Configure Services and MCP (Model Context Protocol)</h4>
+                </div>
+              </div>
+
+              <div class="icon-bullet-grid enhanced-bullet-point">
+                <div class="icon-bullet-container card-icon card-icon-warning">
+                  <i class="fas fa-users icon-bullet-icon"></i>
+                </div>
+                <div class="icon-bullet-content">
+                  <h4 class="text-xl font-semibold text-white">Establish user guidelines and coding standards</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom emphasis -->
+        <div class="card-solid p-4 mt-8">
+          <p class="text-center text-black">
+            <i class="fas fa-rocket text-green-600 mr-2"></i>
+            Proper configuration is the foundation of successful AI-assisted development
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Slide 8: AI for Refactoring Legacy Code -->
+    <section class="slide" id="slide-8">
       <div class="slide-content">
         <h2 class="slide-title">Demo 1: Refactor Legacy Node</h2>
         <p class="slide-subtitle">
@@ -1097,7 +1266,7 @@ export class UsersService {
     </section>
 
     <!-- Slide 8: AI for Testing & Documentation -->
-    <section class="slide" id="slide-8">
+    <section class="slide" id="slide-9">
       <div class="slide-content">
         <h2 class="slide-title">Docs-as-Code in Node</h2>
         <p class="slide-subtitle">
@@ -1205,7 +1374,7 @@ export class UsersService {
 
 
     <!-- Slide 10: AI in CI/CD Workflows -->
-    <section class="slide" id="slide-9">
+    <section class="slide" id="slide-11">
       <div class="slide-content">
         <h2 class="slide-title">Demo 3: CI/CD + Copilot PR Review</h2>
         <p class="slide-subtitle">
@@ -1371,7 +1540,7 @@ export class UsersService {
     <!-- Slide 13: Business Implementation Strategy -->
 
     <!-- Pitfalls: Place after Demo 3 -->
-    <section class="slide" id="slide-pitfalls">
+    <section class="slide" id="slide-12">
       <div class="slide-content">
         <h2 class="slide-title">AI Isn't Magic  The Pitfalls</h2>
         <p class="slide-subtitle">Awareness first. You are the guardrail.</p>
