@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
     <title>AI-Accelerated Node.js Development</title>
 
     <!--
@@ -259,17 +259,19 @@
         line-height: 1.6;
         overflow-x: auto;
         backdrop-filter: blur(15px);
-        width: 180%; /* Slightly reduced for better container fit */
-        max-width: 85vw; /* Better viewport constraint */
-        margin-left: -70%; /* Adjusted offset for proper centering */
+        width: 100%; /* Fit within container */
+        max-width: 90vw; /* Prevent viewport overflow */
+        margin-left: auto; /* Center properly */
+        margin-right: auto;
         position: relative;
         z-index: 10;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.3);
       }
 
       .code-example-right {
-        margin-left: -5% !important; /* Adjusted offset for proper centering */
-        margin-top: -10rem !important;
+        margin-left: auto !important; /* Center properly */
+        margin-right: auto !important;
+        margin-top: -6rem !important; /* Consistent with base code-example */
       }
 
       .code-example pre {
@@ -343,8 +345,10 @@
       /* Content Cards */
       .content-grid {
         display: grid;
-        gap: 2rem;
+        gap: 1.5rem; /* Reduced gap to prevent overflow */
         margin-top: 3rem;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       .content-grid.grid-2 {
@@ -370,6 +374,8 @@
       .content-grid.grid-4 {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        max-width: 100%;
+        gap: 1.5rem; /* Reduce gap to prevent overflow */
       }
 
       .content-grid.grid-5 {
@@ -421,7 +427,7 @@
       }
 
       .card-title-dark {
-        font-size: 1.75rem;
+        font-size: 2.5rem;
         font-weight: 700;
         color: #1a1a1a;
         margin-bottom: 1rem;
@@ -627,9 +633,44 @@
         }
       }
 
-      /* Scroll Snap */
+      /* Scroll Snap and Viewport Control */
       html {
         scroll-snap-type: y mandatory;
+        overflow-x: hidden; /* Prevent horizontal overflow */
+      }
+
+      /* Prevent browser auto-zoom by ensuring content fits viewport */
+      * {
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+
+      /* Ensure grid containers don't overflow */
+      .grid {
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      /* Ensure all content containers respect viewport */
+      .slide-content,
+      .glass-strong,
+      .card-solid {
+        max-width: 100%;
+        overflow-wrap: break-word;
+      }
+
+      /* Force browser to maintain 100% zoom by preventing any content overflow */
+      body {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+
+      /* Ensure no element can cause horizontal scroll */
+      .slide {
+        width: 100vw;
+        max-width: 100vw;
+        overflow-x: hidden;
       }
     </style>
   </head>
@@ -664,8 +705,8 @@
 
     <!-- Slide 1: Title Slide -->
     <section class="slide active" id="slide-1">
-      <div class="slide-content">
-        <div class="glass-strong p-12 floating">
+      <div class="slide-content max-w-7xl" >
+        <div class="glass-strong  p-12 floating">
           <div class="flex items-center justify-center gap-6 mb-8">
             <div class="text-9xl">
               <i class="fab fa-node-js text-green-400"></i>
@@ -682,12 +723,12 @@
           <div class="card-solid p-12 mt-24">
             <div class="grid grid-cols-1 mb-4 md:grid-cols-2 gap-4 text-center">
               <div>
-                <p class="text-3xl mb-4 text-black font-medium">Tyler Steck</p>
-                <p class="text-sm text-green-700">Packsize International</p>
+                <p class="text-5xl mb-4 text-black font-medium">Tyler Steck</p>
+                <p class="text-2xl text-green-700">Packsize International</p>
               </div>
               <div>
-                <p class="text-3xl mb-4 text-black font-medium">Lucas Kamakura</p>
-                <p class="text-sm text-green-700">Augment Code</p>
+                <p class="text-5xl mb-4 text-black font-medium">Lucas Kamakura</p>
+                <p class="text-2xl text-green-700">Augment Code</p>
               </div>
             </div>
             <p class="text-2xl text-gray-800 mt-8 text-center">
@@ -700,29 +741,35 @@
 
 <section class="slide" id="slide-2">
       <div class="slide-content">
-        <h2 class="slide-title">Speakers</h2>
+        <h2 class="slide-title">About Us</h2>
         <!-- <p class="slide-subtitle">
           Let's chat about our speakers today
         </p> -->
 
         <div class="content-grid grid-2">
           <div class="card-solid">
-            <div class="card-icon card-icon-primary">
-              <i class="fas fa-code"></i>
-            </div>
-            <h3 class="card-title-dark">Tyler Steck</h3>
-            <p class="card-text-dark">
-              Leader in Software Engineering have worked from startup to large enterprise companies. Currently work as a Senior Engieneer at Packsize International. Currently working with C# but missed Node.JS that I wanted to speak about it as my two previous roles were in Node.JS.S
+    
+            <img src="../images/tyler-steck.jpg" alt="Tyler Steck" class="w-64 h-64 rounded-full mx-auto mb-4">
+            <div class="card-title-dark">Tyler Steck</div>
+            <p class="card-text-dark text-3xl ">
+             Senior Engineer at Packsize International
+            </p>
+            <br/>
+            <p class="card-text-dark text-3xl ">
+             Enthralled by AI and enjoy tinkering with Node.JS! 
             </p>
           </div>
 
           <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-clock"></i>
-            </div>
-            <h3 class="card-title-dark">Lucas Kamakura</h3>
-            <p class="card-text-dark">
-              Solutions Architect at Augment Code providing AI-assisted development tools to help teams build better software faster.
+
+            <img src="../images/lucas-kamakura.jpg" alt="Lucas Kamakura" class="w-64 h-64 rounded-full mx-auto mb-4">
+            <div class="card-title-dark">Lucas Kamakura</div>
+            <p class="card-text-dark text-3xl">
+              Solutions Architect at Augment Code
+            </p>
+            <br/>
+            <p class="card-text-dark text-3xl">
+              Provides AI-assisted development tools to help teams build better software faster.
             </p>
           </div>
         </div>
@@ -733,9 +780,9 @@
     <!-- Slide 3: Why This Session Matters -->
     <section class="slide" id="slide-3">
       <div class="slide-content">
-        <h2 class="slide-title">The Node + AI Mindset</h2>
+        <h2 class="slide-title">The Node.js Initiatives</h2>
         <p class="slide-subtitle">
-          Pair programming with guardrails: Verify • Diff • Test • Document
+          Manual, repetitive tasks that consume weeks of developer time
         </p>
 
         <div class="content-grid grid-4">
@@ -745,7 +792,7 @@
             </div>
             <h3 class="card-title-dark">Large Feature Integration</h3>
             <p class="card-text-dark">
-              Cross-service changes (API/DB/queues) with coordination and rollout plans — often days to weeks
+              Cross-cutting changes (API/Services/DB), docs and rollout plans — often days to weeks.
             </p>
           </div>
 
@@ -755,7 +802,7 @@
             </div>
             <h3 class="card-title-dark">Untangling Async & Side Effects</h3>
             <p class="card-text-dark">
-              Node-specific: callback hell, hidden state, mixed concerns — hours to days
+              Callback hell, hidden state, messy code — hours to days
             </p>
           </div>
 
@@ -775,15 +822,9 @@
             </div>
             <h3 class="card-title-dark">Dependency Upgrades & Security</h3>
             <p class="card-text-dark">
-              Major version bumps, audit fixes, policy enforcement — hours to days
+              Major version bumps, package dependencies, policy enforcement — hours to days
             </p>
           </div>
-        </div>
-
-        <div class="card-solid p-4 mt-6">
-          <p class="text-center text-black">
-            Ask for size estimates explicitly (minutes • hours • days • weeks) — large systems vary widely
-          </p>
         </div>
       </div>
     </section>
@@ -808,29 +849,7 @@
             </p>
           </div>
 
-          <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-vial"></i>
-            </div>
-            <h3 class="card-title-dark">Writing Tests</h3>
-            <p class="card-text-dark">
-              Unit → integration → E2E, with fixtures/mocks suggested by AI.
-              <br><small class="text-green-600">≈90% faster</small>
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-comments"></i>
-            </div>
-            <h3 class="card-title-dark">Code Review Recommendations</h3>
-            <p class="card-text-dark">
-              Inline suggestions, diffs explained, risky patterns flagged.
-              <br><small class="text-green-600">≈50% less reviewer time</small>
-            </p>
-          </div>
-
-          <div class="card-solid">
+         <div class="card-solid">
             <div class="card-icon card-icon-accent">
               <i class="fas fa-tools"></i>
             </div>
@@ -840,6 +859,30 @@
               <br><small class="text-green-600">≈90% faster</small>
             </p>
           </div>
+
+          <div class="card-solid">
+            <div class="card-icon card-icon-secondary">
+              <i class="fas fa-vial"></i>
+            </div>
+            <h3 class="card-title-dark">Writing Tests</h3>
+            <p class="card-text-dark">
+              Unit → integration → E2E, with fixtures/mocks hydrated by AI.
+              <br><small class="text-green-600">≈90% faster</small>
+            </p>
+          </div>
+
+
+          <div class="card-solid">
+            <div class="card-icon card-icon-tertiary">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h3 class="card-title-dark">Security Recommendations</h3>
+            <p class="card-text-dark">
+              Mitigate vulnerabilities, implement major version upgrades, docs & impact analysis.
+              <br><small class="text-green-600">≈50% less time</small>
+            </p>
+          </div>
+ 
         </div>
       </div>
     </section>
@@ -901,13 +944,13 @@
     <section class="slide" id="slide-5">
       <div class="slide-content">
         <h2 class="slide-title">
-          Key Principle → AI as a Pair, Not a Replacement
+          AI as a Pair, Not a Replacement
         </h2>
         <p class="slide-subtitle">
           Harmony: put the right tool in the engineer's hands - AI as a Pair
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div class="glass-strong p-8 text-center">
             <div class="card-icon card-icon-primary">
               <i class="fas fa-user"></i>
@@ -915,16 +958,16 @@
             <h3 class="text-2xl font-bold text-blue-300 mb-6">Developers</h3>
             <div class="space-y-4">
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-brain text-blue-600 mr-2"></i> Guide and architect solutions</p>
+                <p class="card-text-dark"><i class="fas fa-brain text-blue-600 mr-2"></i> Envision & Architect</p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-eye text-blue-600 mr-2"></i> Review and refine code</p>
+                <p class="card-text-dark"><i class="fas fa-shield-alt text-blue-600 mr-2"></i> Quality & Security </p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-bullseye text-blue-600 mr-2"></i> Make strategic decisions</p>
+                <p class="card-text-dark"><i class="fas fa-eye text-blue-600 mr-2"></i> Review & Tune</p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-shield-alt text-blue-600 mr-2"></i> Ensure quality and security</p>
+                <p class="card-text-dark"><i class="fas fa-bullseye text-blue-600 mr-2"></i> Orchestrate AI Agents</p>
               </div>
             </div>
           </div>
@@ -936,16 +979,16 @@
             <h3 class="text-2xl font-bold text-purple-300 mb-6">AI</h3>
             <div class="space-y-4">
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-bolt text-purple-600 mr-2"></i> Handle boilerplate code</p>
+                <p class="card-text-dark"><i class="fas fa-bolt text-purple-600 mr-2"></i> Code Generation</p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-sync-alt text-purple-600 mr-2"></i> Automate repetitive patterns</p>
+                <p class="card-text-dark"><i class="fas fa-sync-alt text-purple-600 mr-2"></i> Agents withMCP</p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-book text-purple-600 mr-2"></i> Suggest best practices</p>
+                <p class="card-text-dark"><i class="fas fa-book text-purple-600 mr-2"></i> Suggestions</p>
               </div>
               <div class="card-solid">
-                <p class="card-text-dark"><i class="fas fa-tools text-purple-600 mr-2"></i> Integrate with SDLC</p>
+                <p class="card-text-dark"><i class="fas fa-tools text-purple-600 mr-2"></i> Follow SDLC</p>
               </div>
             </div>
           </div>
@@ -960,69 +1003,100 @@
       <div class="slide-content">
         <h2 class="slide-title">AI-Powered Project Genesis</h2>
         <p class="slide-subtitle">
-          Harmony: AI helps create the foundation – Engineers expand and iterate
+          Master prompt engineering to generate better foundations faster
         </p>
 
         <!-- Creative Layout: Split design with logos on left, content on right -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <!-- Left side: Tool logos -->
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-white mb-6 text-center">
-              <i class="fas fa-magic mr-3 text-green-400"></i>AI VIBE Coding Tools
+            <h3 class="text-4xl font-bold text-white mb-6 text-center">
+              <i class="fas fa-rocket mr-3 text-green-400"></i>New Project Builders
             </h3>
             <div class="grid grid-cols-2 gap-6">
               <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/lovable-logo.jpg" alt="Lovable" class="w-12 h-12 mb-2">
-                <span class="text-white font-medium">Lovable.dev</span>
+                <img src="../images/lovable-logo.jpg" alt="Lovable" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">lovable.dev</span>
               </div>
               <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/bolt-logo.jpeg" alt="Bolt.new" class="w-12 h-12 mb-2">
-                <span class="text-white font-medium">Bolt.new</span>
+                <img src="../images/bolt-logo.jpeg" alt="Bolt.new" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">bolt.new</span>
               </div>
               <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/v0-dev.png" alt="v0" class="w-12 h-12 mb-2">
-                <span class="text-white font-medium">V0.dev</span>
+                <img src="../images/v0-dev.png" alt="v0" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">v0.dev</span>
               </div>
               <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/replit-logo.svg" alt="Replit" class="w-12 h-12 mb-2">
-                <span class="text-white font-medium">Replit.com</span>
+                <img src="../images/replit-logo.svg" alt="Replit" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">replit.com</span>
               </div>
             </div>
           </div>
 
-          <!-- Right side: Key messaging -->
+          <!-- Right side: Toggleable content -->
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-green-300 mb-6">
-              <i class="fas fa-seedling mr-3"></i>The Power of Prompt Engineering
-            </h3>
-            <div class="space-y-6">
-              <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-primary">
-                  <i class="fas fa-bolt icon-bullet-icon"></i>
+            <!-- Default content: Effective Prompt Strategy -->
+            <div id="strategy-content">
+              <h3 class="text-4xl font-bold text-green-300 mb-6">
+                <i class="fas fa-magic mr-3"></i>Effective Prompt Strategy
+              </h3>
+              <div class="space-y-6">
+                <div class="icon-bullet-grid enhanced-bullet-point">
+                  <div class="icon-bullet-container card-icon card-icon-primary">
+                    <i class="fas fa-search icon-bullet-icon"></i>
+                  </div>
+                  <div class="icon-bullet-content">
+                    <h4 class="text-2xl font-semibold text-white mb-2">Find similar projects using "like" comparisons</h4>
+                  </div>
                 </div>
-                <div class="icon-bullet-content">
-                  <h4 class="text-lg font-semibold text-white mb-2">Generate full boilerplate projects in one prompt</h4>
-                  <p class="text-gray-300">Complete project structures with routing, components, and styling</p>
+
+                <div class="icon-bullet-grid enhanced-bullet-point">
+                  <div class="icon-bullet-container card-icon card-icon-secondary">
+                    <i class="fas fa-list icon-bullet-icon"></i>
+                  </div>
+                  <div class="icon-bullet-content">
+                    <h4 class="text-2xl font-semibold text-white mb-2">Specify frameworks, configs, and expectations</h4>
+                  </div>
+                </div>
+
+                <div class="interactive-button-demo" id="show-examples-btn">
+                  <div class="glass-subtle p-6 rounded-lg border-2 border-green-400 hover:border-green-300 transition-all duration-300 cursor-pointer hover:bg-green-400/10">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center">
+                        <div class="icon-bullet-container card-icon card-icon-tertiary mr-4">
+                          <i class="fas fa-code icon-bullet-icon"></i>
+                        </div>
+                        <div>
+                          <h4 class="text-2xl font-semibold text-white mb-1">Prompt Examples</h4>
+                        </div>
+                      </div>
+                      <div class="text-green-400 text-2xl">
+                        <i class="fas fa-chevron-right"></i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-secondary">
-                  <i class="fas fa-expand-arrows-alt icon-bullet-icon"></i>
-                </div>
-                <div class="icon-bullet-content">
-                  <h4 class="text-lg font-semibold text-white mb-2">Expand prompts iteratively for design & architecture</h4>
-                  <p class="text-gray-300">Refine and enhance your vision through conversational iteration</p>
-                </div>
+            <!-- Hidden prompt examples content -->
+            <div id="examples-content" style="display: none;">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-4xl font-bold text-green-300">
+                  <i class="fas fa-code mr-3"></i>Prompt Examples
+                </h3>
+                <button id="hide-examples-btn" class="text-gray-300 hover:text-white cursor-pointer text-lg">
+                  <i class="fas fa-times mr-2"></i>Hide Examples
+                </button>
               </div>
-
-              <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-tertiary">
-                  <i class="fas fa-rocket icon-bullet-icon"></i>
+              <div class="grid grid-cols-1 gap-6">
+                <div class="glass-subtle p-6 rounded-lg">
+                  <h5 class="text-2xl font-bold text-red-400 mb-3">❌ Bad Prompt</h5>
+                  <p class="text-lg text-gray-300 italic">"Create a website that tracks tasks"</p>
                 </div>
-                <div class="icon-bullet-content">
-                  <h4 class="text-lg font-semibold text-white mb-2">Create strong foundations for scaling</h4>
-                  <p class="text-gray-300">Transition seamlessly from prototype to production-ready code</p>
+                <div class="glass-subtle p-6 rounded-lg">
+                  <h5 class="text-2xl font-bold text-green-400 mb-3">✅ Good Prompt</h5>
+                  <p class="text-lg text-gray-300 italic">"Create a TypeScript React website that uses Google SSO for allowing a user to create tasks and to share their lists with friends so that they can celebrate completing their daily list of items. Create the app using Supabase. The design should be modern and clean like Todoist."</p>
                 </div>
               </div>
             </div>
@@ -1031,9 +1105,9 @@
 
         <!-- Bottom call-to-action -->
         <div class="card-solid p-4 mt-8">
-          <p class="text-center text-black">
+          <p class="text-center text-black text-xl">
             <i class="fas fa-lightbulb text-yellow-600 mr-2"></i>
-            Start with AI VIBE coding, then scale with properly configured AI agents
+            Detailed prompts = better foundations. Iterate outside these tools, then scale with configured AI agents
           </p>
         </div>
       </div>
@@ -1045,36 +1119,36 @@
         <h2 class="slide-title">Choose + Configure Your Tools</h2>
         <p class="slide-subtitle">Configuration is critical for AI coding success</p>
 
-        <!-- Creative Layout: Logos on left, enhanced content on right -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <!-- Creative Layout: Split design with logos on left, content on right -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <!-- Left side: Tool logos prominently displayed -->
-          <div class="glass-strong p-6">
-            <h3 class="text-xl font-bold text-white mb-6 text-center">
-              <i class="fas fa-tools mr-2 text-blue-400"></i>AI Coding Tools
+          <div class="glass-strong p-8">
+            <h3 class="text-4xl font-bold text-white mb-6 text-center">
+              <i class="fas fa-tools mr-3 text-blue-400"></i>AI Coding Chat & Agents 
             </h3>
-            <div class="space-y-4">
-              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/copilot-logo.png" alt="GitHub Copilot" class="w-8 h-8">
-                <span class="text-white font-medium">GitHub Copilot</span>
+            <div class="grid grid-cols-2 gap-6">
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/copilot-logo.png" alt="GitHub Copilot" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">GitHub Copilot</span>
               </div>
-              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/cursor-logo.png" alt="Cursor" class="w-8 h-8">
-                <span class="text-white font-medium">Cursor</span>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/cursor-logo.png" alt="Cursor" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">Cursor</span>
               </div>
-              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/claude-logo.png" alt="Claude" class="w-8 h-8">
-                <span class="text-white font-medium">Claude</span>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/claude-logo.png" alt="Claude" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">Claude</span>
               </div>
-              <div class="flex items-center space-x-3 p-3 glass-subtle rounded-lg tool-logo-container">
-                <img src="../images/augment-logo.png" alt="Augment" class="w-8 h-8">
-                <span class="text-white font-medium">Augment</span>
+              <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
+                <img src="../images/augment-logo.png" alt="Augment" class="w-14 h-14 mb-2">
+                <span class="text-white text-4xl">Augment</span>
               </div>
             </div>
           </div>
 
-          <!-- Right side: Enhanced configuration bullet points -->
-          <div class="md:col-span-2 glass-strong p-8">
-            <h3 class="text-2xl font-bold text-blue-300 mb-6">
+          <!-- Right side: Key messaging -->
+          <div class="glass-strong p-8">
+            <h3 class="text-4xl font-bold text-blue-300 mb-6">
               <i class="fas fa-cogs mr-3"></i>Essential Configuration Steps
             </h3>
             <div class="space-y-6">
@@ -1083,7 +1157,7 @@
                   <i class="fas fa-file-alt icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-xl font-semibold text-white">Set codebase prompts & standards (README/ADRs)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Set codebase prompts & standards (README/ADRs)</h4>
                 </div>
               </div>
 
@@ -1092,7 +1166,7 @@
                   <i class="fas fa-brain icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-xl font-semibold text-white">Select appropriate models (GPT/Claude)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Select appropriate models (GPT/Claude)</h4>
                 </div>
               </div>
 
@@ -1101,7 +1175,7 @@
                   <i class="fas fa-search icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-xl font-semibold text-white">Leverage codebase indexing and file context</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Leverage codebase indexing and file context</h4>
                 </div>
               </div>
 
@@ -1110,25 +1184,25 @@
                   <i class="fas fa-plug icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-xl font-semibold text-white">Configure Services and MCP (Model Context Protocol)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Configure Services and MCP (Model Context Protocol)</h4>
                 </div>
               </div>
 
               <div class="icon-bullet-grid enhanced-bullet-point">
                 <div class="icon-bullet-container card-icon card-icon-warning">
-                  <i class="fas fa-users icon-bullet-icon"></i>
+                  <i class="fas fa-user icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-xl font-semibold text-white">Establish user guidelines and coding standards</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Establish user guidelines and coding standards</h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bottom emphasis -->
+        <!-- Bottom call-to-action -->
         <div class="card-solid p-4 mt-8">
-          <p class="text-center text-black">
+          <p class="text-center text-black text-xl">
             <i class="fas fa-rocket text-green-600 mr-2"></i>
             Proper configuration is the foundation of successful AI-assisted development
           </p>
@@ -1776,7 +1850,7 @@ export class UsersService {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
                   <div>
                     <p class="text-3xl text-black font-medium">Tyler Steck</p>
-                    <p class="text-xl text-green-700 mb-2">
+                    <p class="text-2xl text-green-700 mb-2">
                       Packsize International
                     </p>
                     <div class="flex justify-center gap-2">
@@ -1961,6 +2035,8 @@ export class UsersService {
         setupInteractiveDemos() {
           const beforeDemo = document.getElementById("before-demo");
           const afterDemo = document.getElementById("after-demo");
+          const showExamplesBtn = document.getElementById("show-examples-btn");
+          const hideExamplesBtn = document.getElementById("hide-examples-btn");
 
           if (beforeDemo) {
             beforeDemo.addEventListener("click", () => {
@@ -1971,6 +2047,18 @@ export class UsersService {
           if (afterDemo) {
             afterDemo.addEventListener("click", () => {
               this.toggleCodeExample("after");
+            });
+          }
+
+          if (showExamplesBtn) {
+            showExamplesBtn.addEventListener("click", () => {
+              this.showPromptExamples();
+            });
+          }
+
+          if (hideExamplesBtn) {
+            hideExamplesBtn.addEventListener("click", () => {
+              this.hidePromptExamples();
             });
           }
         }
@@ -1991,6 +2079,26 @@ export class UsersService {
               content.style.display = "block";
               code.style.display = "none";
             }
+          }
+        }
+
+        showPromptExamples() {
+          const strategyContent = document.getElementById("strategy-content");
+          const examplesContent = document.getElementById("examples-content");
+
+          if (strategyContent && examplesContent) {
+            strategyContent.style.display = "none";
+            examplesContent.style.display = "block";
+          }
+        }
+
+        hidePromptExamples() {
+          const strategyContent = document.getElementById("strategy-content");
+          const examplesContent = document.getElementById("examples-content");
+
+          if (strategyContent && examplesContent) {
+            strategyContent.style.display = "block";
+            examplesContent.style.display = "none";
           }
         }
 
