@@ -1,5 +1,3 @@
-import { Injectable } from '@nestjs/common';
-
 export interface CartItem {
   id: string;
   name: string;
@@ -7,7 +5,6 @@ export interface CartItem {
   quantity: number;
 }
 
-@Injectable()
 export class CartService {
   private items: CartItem[] = [];
 

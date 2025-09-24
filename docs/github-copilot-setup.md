@@ -14,7 +14,7 @@ This guide explains how to configure GitHub Copilot for automated pull request r
 ### 2. Repository Configuration
 
 1. **Enable Actions**: Go to repository Settings → Actions → General
-2. **Set Permissions**: 
+2. **Set Permissions**:
    - Allow GitHub Actions to create and approve pull requests
    - Set "Read and write permissions" for GITHUB_TOKEN
 3. **Add Secrets** (if using Codecov):
@@ -26,6 +26,7 @@ This guide explains how to configure GitHub Copilot for automated pull request r
 The repository includes two automated workflows:
 
 #### `.github/workflows/ci.yml`
+
 - **Purpose**: Comprehensive CI/CD pipeline
 - **Triggers**: Push to main/develop, PRs to main
 - **Features**:
@@ -36,6 +37,7 @@ The repository includes two automated workflows:
   - Coverage reporting
 
 #### `.github/workflows/copilot-review.yml`
+
 - **Purpose**: AI-powered code review
 - **Triggers**: PR opened/updated
 - **Features**:
@@ -186,7 +188,6 @@ npm run demo:tdd         # Test demo 3
 
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [NestJS Testing Guide](https://docs.nestjs.com/fundamentals/testing)
 - [TypeScript Best Practices](https://typescript-eslint.io/rules/)
 
 ## 🎉 Ready for Presentation

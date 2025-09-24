@@ -5,10 +5,10 @@
 ### 🔄 Refactoring Legacy Code
 
 ```
-Refactor this legacy code to modern TypeScript/NestJS:
+Refactor this legacy code to modern TypeScript (framework-agnostic):
 1. Convert callbacks to async/await
 2. Add proper TypeScript types
-3. Use NestJS decorators and DI
+3. Use clean layering and dependency injection where appropriate
 4. Extract constants from magic numbers
 5. Implement consistent error handling
 6. Follow SOLID principles
@@ -20,7 +20,7 @@ Keep the same business logic - only modernize the implementation.
 
 ```
 Implement a complete feature with:
-1. NestJS controller with proper decorators
+1. Express route handler (or framework-agnostic handler) with proper validation
 2. DTOs with validation
 3. Service layer with business logic
 4. Comprehensive unit tests
@@ -33,6 +33,7 @@ Follow existing project patterns and conventions.
 ### 🧪 TDD Workflow
 
 **Red Phase:**
+
 ```
 Make this failing test pass with minimal implementation:
 [paste test code]
@@ -44,6 +45,7 @@ Requirements:
 ```
 
 **Refactor Phase:**
+
 ```
 Refactor this method to improve code quality:
 1. Extract constants
@@ -70,7 +72,7 @@ Generate comprehensive unit tests for this [controller/service]:
 
 ```
 Generate API documentation for this endpoint:
-1. Add Swagger decorators
+1. Add OpenAPI/Swagger documentation (annotations or yaml/json spec)
 2. Document request/response schemas
 3. Include example payloads
 4. Document error responses
@@ -93,14 +95,16 @@ Provide specific suggestions with explanations.
 ## Context-Setting Tips
 
 ### For Better Results, Include:
-- **Project context**: "This is a NestJS project with TypeScript"
+
+- **Project context**: "This is a Node.js TypeScript project"
 - **Existing patterns**: "Follow the pattern used in [existing file]"
 - **Team standards**: "Use our linting rules and conventions"
 - **Specific requirements**: "Must handle these edge cases..."
 
 ### Example Context Block:
+
 ```
-Context: NestJS TypeScript project
+Context: Node.js TypeScript project
 Standards: ESLint + Prettier, strict types
 Patterns: Repository pattern, DTO validation
 Requirements: [specific needs]
@@ -111,17 +115,19 @@ Task: [what you want AI to do]
 ## Demo-Specific Prompts
 
 ### Demo 1: Legacy Refactor
+
 ```
-This legacy JavaScript file has callback hell and inconsistent patterns. 
-Refactor to modern NestJS TypeScript following our team guidelines:
+This legacy JavaScript file has callback hell and inconsistent patterns.
+Refactor to modern TypeScript following our team guidelines:
 - Replace callbacks with async/await
-- Add proper error handling with NestJS exceptions
+- Add proper error handling with appropriate HTTP error responses
 - Extract magic strings/numbers to constants
 - Use dependency injection
 - Add TypeScript types throughout
 ```
 
 ### Demo 2: Feature with MCP
+
 ```
 Connected via MCP to this project. Implement complete /profile endpoint:
 - GET /profile controller method
@@ -133,6 +139,7 @@ Connected via MCP to this project. Implement complete /profile endpoint:
 ```
 
 ### Demo 3: TDD Cycle
+
 ```
 TDD Red Phase: Implement calculateTotal() to make this test pass:
 [test code]

@@ -1,6 +1,7 @@
 # Demo 2: Feature Implementation with MCP
 
 ## Context
+
 GitHub Issue: "Add `/profile` endpoint to return the logged-in user's profile details"
 
 ## AI Prompt for Live Demo (with MCP)
@@ -19,7 +20,7 @@ You are connected to this project via MCP. I need you to implement a complete fe
    - Unit tests for the controller
    - Unit tests for any new service methods
    - Mock all dependencies properly
-6. **Add Swagger documentation** with proper API decorators
+6. **Add Swagger documentation** (OpenAPI spec via annotations or yaml/json)
 7. **Follow our existing patterns** from the users module
 
 **Implementation Steps**:
@@ -28,11 +29,11 @@ You are connected to this project via MCP. I need you to implement a complete fe
 3. Add `getProfile()` method to existing `UsersService`
 4. Create comprehensive test files
 5. Add proper error handling for edge cases
-6. Update any necessary module imports
+6. Wire routes and exports as needed (no framework-specific modules)
 
 **Code Standards**:
 - Use TypeScript strict mode
-- Follow NestJS best practices
+- Follow Node.js/Express best practices
 - Use proper HTTP status codes
 - Include comprehensive error handling
 - Add input validation where needed
@@ -42,6 +43,7 @@ After implementation, create a new branch `feature/profile-endpoint`, commit the
 ```
 
 ## Expected Outcome
+
 - New ProfileController with GET /profile endpoint
 - ProfileResponseDto with proper validation
 - Updated UsersService with getProfile method
@@ -50,6 +52,7 @@ After implementation, create a new branch `feature/profile-endpoint`, commit the
 - Ready for code review
 
 ## Demo Flow
+
 1. Show the GitHub issue
 2. Paste the prompt into MCP-enabled AI
 3. Watch AI generate all files

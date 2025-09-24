@@ -1,40 +1,62 @@
-import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import express from 'express';
+import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+const PORT_DEFAULT = 3000;
 
-  // Global validation pipe
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+const openApiSpec = {
+  openapi: '3.0.0',
+  info: {
+    title: 'NY Node AI Presentation API',
+    description: 'Demo API for AI-Accelerated Node.js Development presentation',
+    version: '1.0.0',
+  },
+  paths: {
+    '/profile': {
+      get: {
+        summary: 'Get current user profile',
+        responses: {
+          '200': {
+            description: 'Profile returned',
+          },
+        },
+      },
+    },
+  },
+} as const;
 
-  // Swagger documentation
-  const config = new DocumentBuilder()
-    .setTitle('NY Node AI Presentation API')
-    .setDescription('Demo API for AI-Accelerated Node.js Development presentation')
-    .setVersion('1.0')
-    .addTag('users')
-    .addTag('profile')
-    .build();
+export function createApp() {
+  const app = express();
+  app.use(cors());
+  app.use(express.json());
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // Simple demo endpoint used by the presentation scripts
+  app.get('/profile', (_req, res) => {
+    const nowIso = new Date().toISOString();
+    res.json({
+      id: 'demo-user',
+      name: 'Demo User',
+      email: 'demo@example.com',
+      createdAt: nowIso,
+      lastLoginAt: nowIso,
+    });
+  });
 
-  // Enable CORS for demo
-  app.enableCors();
-
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-
-  console.log(`🚀 Application is running on: http://localhost:${port}`);
-  console.log(`📚 Swagger documentation: http://localhost:${port}/api`);
+  // Swagger UI mounted at /api
+  app.use('/api', swaggerUi.serve, swaggerUi.setup(openApiSpec as any));
+  return app;
 }
 
-bootstrap();
+async function bootstrap() {
+  const app = createApp();
+  const port = Number(process.env.PORT) || PORT_DEFAULT;
+  app.listen(port, () => {
+    console.log(`🚀 Application is running on: http://localhost:${port}`);
+    console.log(`📚 API docs: http://localhost:${port}/api`);
+  });
+}
+
+if (require.main === module) {
+  // Only start server when running as entrypoint, not when imported in tests
+  bootstrap();
+}

@@ -7,7 +7,7 @@ This project demonstrates AI-accelerated Node.js development patterns for the In
 ### Demo 1: Legacy Code Refactoring
 
 - **File**: `src/legacy/user-service-messy.js`
-- **Goal**: Refactor callback hell to modern async/await with NestJS patterns
+- **Goal**: Refactor callback hell to modern async/await with clean, framework-agnostic patterns
 - **AI Prompt**: See `prompts/refactor-legacy.md`
 
 ### Demo 2: Feature Implementation with MCP
@@ -31,8 +31,6 @@ npm run demo:setup
 # Start development server
 npm run start:dev
 
-# Open Swagger documentation (in new terminal)
-open http://localhost:3000/api
 
 # Run individual demo scenarios
 npm run demo:refactor  # Demo 1: Legacy refactoring
@@ -64,7 +62,7 @@ See [GitHub Copilot Setup Guide](./docs/github-copilot-setup.md) for detailed in
 ny-node-ai-presentation/
 ├── src/
 │   ├── legacy/           # Messy code for refactoring demos
-│   ├── modern/           # Clean NestJS implementations
+│   ├── modern/           # Modern, framework-agnostic examples
 │   ├── services/         # Business logic services
 │   ├── controllers/      # API endpoints
 │   ├── dto/              # Data transfer objects
@@ -76,7 +74,6 @@ ny-node-ai-presentation/
 
 ## 🛠 Tech Stack
 
-- **Framework**: NestJS
 - **Language**: TypeScript
 - **Testing**: Jest
 - **Linting**: ESLint + Prettier
@@ -153,11 +150,11 @@ The repository includes comprehensive GitHub Actions workflows:
 - [AI Prompts](./prompts/) - Structured prompts for each demo
 - [Presentation Slides](./presentation/) - Conference presentation materials
 - [Legacy Code](./src/legacy/) - Messy code for refactoring demos
-- [Modern Examples](./src/modern/) - Clean NestJS implementations
+- [Modern Examples](./src/modern/) - Modern, framework-agnostic examples
 
 ### External Resources
 
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [NestJS Documentation](https://docs.nestjs.com/)
+
 - [TypeScript Best Practices](https://typescript-eslint.io/rules/)
 - [Jest Testing Framework](https://jestjs.io/docs/getting-started)
