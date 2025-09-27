@@ -266,7 +266,7 @@ usersRouter.get('/:id', async (req, res) => {
 
 ---
 
-## **SLIDE 8: DOCS-AS-CODE IN NODE** _(19:00-20:00)_
+## **SLIDE 8: RULES FOR AI NODE** _(19:00-20:00)_
 
 ### Speaker Notes:
 

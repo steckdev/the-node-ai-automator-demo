@@ -1,7 +1,6 @@
 ---
-type: manual
-title: Review Guidelines
-description: Attach for design/code reviews or PR preparation. Ensures production-readiness and demo consistency.
+type: 'manual'
+description: 'Attach for design/code reviews or PR preparation. Ensures production-readiness and demo consistency.'
 ---
 
 - Scope: small, focused changes; clear title; meaningful commits; branch naming: feat/_, fix/_, chore/\*

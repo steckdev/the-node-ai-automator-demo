@@ -645,10 +645,10 @@
         box-sizing: border-box;
       }
 
-      /* Ensure grid containers don't overflow */
+      /* Allow grid children to render shadows/overflow properly across slides */
       .grid {
         max-width: 100%;
-        overflow: hidden;
+        overflow: visible;
       }
 
       /* Ensure all content containers respect viewport */
@@ -748,7 +748,7 @@
 
         <div class="content-grid grid-2">
           <div class="card-solid">
-    
+
             <img src="../images/tyler-steck.jpg" alt="Tyler Steck" class="w-64 h-64 rounded-full mx-auto mb-4">
             <div class="card-title-dark">Tyler Steck</div>
             <p class="card-text-dark text-3xl ">
@@ -756,7 +756,7 @@
             </p>
             <br/>
             <p class="card-text-dark text-3xl ">
-             Enthralled by AI and enjoy tinkering with Node.JS! 
+             Enthralled by AI and enjoy tinkering with Node.JS!
             </p>
           </div>
 
@@ -878,11 +878,11 @@
             </div>
             <h3 class="card-title-dark">Security Recommendations</h3>
             <p class="card-text-dark">
-              Mitigate vulnerabilities, implement major version upgrades, docs & impact analysis.
+              Mitigate vulnerabilities, implement major version upgrades and impact.
               <br><small class="text-green-600">≈50% less time</small>
             </p>
           </div>
- 
+
         </div>
       </div>
     </section>
@@ -1003,7 +1003,7 @@
       <div class="slide-content">
         <h2 class="slide-title">AI-Powered Project Genesis</h2>
         <p class="slide-subtitle">
-          Master prompt engineering to generate better foundations faster
+          Prompt engineering is key for AI to generate a proper foundation
         </p>
 
         <!-- Creative Layout: Split design with logos on left, content on right -->
@@ -1107,7 +1107,7 @@
         <div class="card-solid p-4 mt-8">
           <p class="text-center text-black text-xl">
             <i class="fas fa-lightbulb text-yellow-600 mr-2"></i>
-            Detailed prompts = better foundations. Iterate outside these tools, then scale with configured AI agents
+            Detailed prompts = better foundations. Iterate outside of these tools, then export and scale with your editor.
           </p>
         </div>
       </div>
@@ -1116,15 +1116,15 @@
     <!-- Slide 7: Choose + Configure Your Tools -->
     <section class="slide" id="slide-7">
       <div class="slide-content">
-        <h2 class="slide-title">Code + Configure Your Tools</h2>
-        <p class="slide-subtitle">Configuration is critical for AI coding success</p>
+        <h2 class="slide-title">Configure Your Tools</h2>
+        <p class="slide-subtitle">Proper configuration is the foundation of successful AI-assisted development</p>
 
         <!-- Creative Layout: Split design with logos on left, content on right -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <!-- Left side: Tool logos prominently displayed -->
           <div class="glass-strong p-8">
             <h3 class="text-4xl font-bold text-white mb-6 text-center">
-              <i class="fas fa-tools mr-3 text-blue-400"></i>AI Coding Chat & Agents 
+              <i class="fas fa-tools mr-3 text-blue-400"></i>AI Coding IDE & Agents
             </h3>
             <div class="grid grid-cols-2 gap-6">
               <div class="flex flex-col items-center p-4 glass-subtle rounded-lg tool-logo-container">
@@ -1153,29 +1153,29 @@
             </h3>
             <div class="space-y-6">
               <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-primary">
-                  <i class="fas fa-file-alt icon-bullet-icon"></i>
+                <div class="icon-bullet-container card-icon card-icon-warning">
+                  <i class="fas fa-user icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-2xl font-semibold text-white mb-2">Set codebase prompts & standards (README/ADRs)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">User guidelines</h4>
                 </div>
               </div>
 
               <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-secondary">
-                  <i class="fas fa-brain icon-bullet-icon"></i>
+                <div class="icon-bullet-container card-icon card-icon-primary">
+                  <i class="fas fa-file-alt icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-2xl font-semibold text-white mb-2">Select appropriate models (GPT/Claude)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2"> AGENTS.md and **/rules/*.md</h4>
                 </div>
               </div>
 
               <div class="icon-bullet-grid enhanced-bullet-point">
                 <div class="icon-bullet-container card-icon card-icon-tertiary">
-                  <i class="fas fa-search icon-bullet-icon"></i>
+                  <i class="fas fa-brain icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-2xl font-semibold text-white mb-2">Leverage codebase indexing and file context</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Codebase indexing and prompt w/ context</h4>
                 </div>
               </div>
 
@@ -1184,28 +1184,12 @@
                   <i class="fas fa-plug icon-bullet-icon"></i>
                 </div>
                 <div class="icon-bullet-content">
-                  <h4 class="text-2xl font-semibold text-white mb-2">Configure Services and MCP (Model Context Protocol)</h4>
+                  <h4 class="text-2xl font-semibold text-white mb-2">Connect Services + MCP (Model Context Protocol)</h4>
                 </div>
               </div>
 
-              <div class="icon-bullet-grid enhanced-bullet-point">
-                <div class="icon-bullet-container card-icon card-icon-warning">
-                  <i class="fas fa-user icon-bullet-icon"></i>
-                </div>
-                <div class="icon-bullet-content">
-                  <h4 class="text-2xl font-semibold text-white mb-2">Establish user guidelines and coding standards</h4>
-                </div>
-              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Bottom call-to-action -->
-        <div class="card-solid p-4 mt-8">
-          <p class="text-center text-black text-xl">
-            <i class="fas fa-rocket text-green-600 mr-2"></i>
-            Proper configuration is the foundation of successful AI-assisted development
-          </p>
         </div>
       </div>
     </section>
@@ -1295,37 +1279,39 @@ app.get('/users/:id', (req, res) => {
             </div>
             <div class="code-example code-example-right" id="after-code" style="display: none;">
               <pre><code class="language-typescript">// Modern, framework-agnostic approach
-@Controller('users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+const BAD_REQUEST = 400;
+const NOT_FOUND = 404;
+const INTERNAL_ERROR = 500;
 
-  @Get(':id')
-  async findUserWithPosts(@Param('id', ParseIntPipe) id: number) {
-    try {
-      const user = await this.usersService.findOneWithPosts(id);
-
-      if (!user) {
-        throw new NotFoundException('User not found');
-      }
-
-      return user;
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      throw new InternalServerErrorException('Failed to fetch user');
-    }
+class UsersRepository {
+  async findOneWithPosts(id: number): Promise<UserWithPosts | null> {
+    // TODO: query database and join posts
+    return null;
   }
 }
 
-@Injectable()
-export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
-
-  async findOneWithPosts(id: number): Promise<UserWithPosts> {
-    return this.usersRepository.findOneWithPosts(id);
+class UsersService {
+  constructor(private readonly repo: UsersRepository) {}
+  async findOneWithPosts(id: number) {
+    return this.repo.findOneWithPosts(id);
   }
-}</code></pre>
+}
+
+// Express route (example)
+app.get('/users/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(BAD_REQUEST).json({ error: 'Invalid ID' });
+  }
+  try {
+    const data = await usersService.findOneWithPosts(id);
+    if (!data) return res.status(NOT_FOUND).json({ error: 'User not found' });
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(INTERNAL_ERROR).json({ error: 'Failed to fetch user' });
+  }
+});</code></pre>
             </div>
           </div>
         </div>
@@ -1616,40 +1602,41 @@ export class UsersService {
     <!-- Pitfalls: Place after Demo 3 -->
     <section class="slide" id="slide-12">
       <div class="slide-content">
-        <h2 class="slide-title">AI Isn't Magic  The Pitfalls</h2>
-        <p class="slide-subtitle">Awareness first. You are the guardrail.</p>
+        <h2 class="slide-title">AI Isn't Magic - The Pitfalls</h2>
+        <p class="slide-subtitle">Power with responsibility. You are the guardrail.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-green-300 mb-4">
-              <i class="fas fa-magic mr-3"></i>AI Power
+            <h3 class="text-4xl font-bold text-green-300 mb-4">
+              <i class="fas fa-magic mr-3"></i>Business Impact
             </h3>
             <div class="space-y-4">
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-bolt text-green-500 mr-2"></i> Rapid code generation</p></div>
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-project-diagram text-green-500 mr-2"></i> Pattern recognition</p></div>
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-tachometer-alt text-green-500 mr-2"></i> Productivity boost</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-bolt text-green-500 mr-2"></i> Faster delivery and iteration</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-project-diagram text-green-500 mr-2"></i> Pattern reuse and consistency</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-tachometer-alt text-green-500 mr-2"></i> Throughput on high-value work</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-lightbulb text-green-500 mr-2"></i> Creative problem-solving</p></div>
             </div>
           </div>
 
           <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-red-300 mb-4">
-              <i class="fas fa-exclamation-triangle mr-3"></i>AI Dangers
+            <h3 class="text-4xl font-bold text-red-300 mb-4">
+              <i class="fas fa-exclamation-triangle mr-3"></i>Risks without Guardrails
             </h3>
             <div class="space-y-4">
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-brain text-red-500 mr-2"></i> Hallucinations (confidently wrong)</p></div>
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-user-shield text-red-500 mr-2"></i> Overconfidence (skipping review)</p></div>
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-compress-alt text-red-500 mr-2"></i> Context loss (large systems)</p></div>
-              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-key text-red-500 mr-2"></i> Security risks (secrets/unsafe snippets)</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-key text-red-500 mr-2"></i> Security &amp; compliance exposure (secrets, licenses, PII)</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-brain text-red-500 mr-2"></i> Confidently wrong outputs (hallucinations)</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-user-shield text-red-500 mr-2"></i> Skipping review or blindly trusting</p></div>
+              <div class="card-solid"><p class="card-text-dark"><i class="fas fa-compress-alt text-red-500 mr-2"></i> Context gaps in distributed systems</p></div>
             </div>
           </div>
         </div>
 
-        <div class="card-solid p-4 mt-6">
-          <p class="text-center text-black"><i class="fas fa-user-check mr-2"></i>YOU: Verify  b7 Diff  b7 Test  b7 Document</p>
-        </div>
+
       </div>
     </section>
 
+
+    <!-- Lucas replace this content with your business inspiration. THis is just a placeholder! -->
     <section class="slide" id="slide-13">
       <div class="slide-content">
         <h2 class="slide-title">Security Quick Wins for Node</h2>
@@ -1713,65 +1700,6 @@ export class UsersService {
       </div>
     </section>
 
-    <!-- Slide 14: AI + Node.js Workflow Mindset -->
-    <section class="slide" id="slide-14">
-      <div class="slide-content">
-        <h2 class="slide-title">Live Audience Results</h2>
-        <p class="slide-subtitle">
-          Quick pulse from the room — Where should we go deeper?
-        </p>
-
-        <div class="content-grid grid-3">
-          <div class="card-solid text-center">
-            <div class="card-icon card-icon-primary">
-              <i class="fas fa-seedling"></i>
-            </div>
-            <h3 class="card-title-dark">Start Small</h3>
-            <p class="card-text-dark mb-3">Week 1-2</p>
-            <div class="space-y-2">
-              <p class="card-text-dark">• Scaffolding</p>
-              <p class="card-text-dark">• Documentation</p>
-              <p class="card-text-dark">• Basic tests</p>
-            </div>
-          </div>
-
-          <div class="card-solid text-center">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-expand-arrows-alt"></i>
-            </div>
-            <h3 class="card-title-dark">Expand</h3>
-            <p class="card-text-dark mb-3">Month 1-3</p>
-            <div class="space-y-2">
-              <p class="card-text-dark">• Refactoring</p>
-              <p class="card-text-dark">• CI/CD integration</p>
-              <p class="card-text-dark">• Complex patterns</p>
-            </div>
-          </div>
-
-          <div class="card-solid text-center">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3 class="card-title-dark">Discipline</h3>
-            <p class="card-text-dark mb-3">Always</p>
-            <div class="space-y-2">
-              <p class="card-text-dark">• Human oversight</p>
-              <p class="card-text-dark">• Code reviews</p>
-              <p class="card-text-dark">• Quality gates</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-solid p-6 mt-8">
-          <p class="text-xl text-center text-black">
-            <i class="fas fa-plus text-blue-600 mx-3"></i>
-            AI + Node.js = Productivity Boost with Discipline
-            <i class="fas fa-plus text-blue-600 mx-3"></i>
-          </p>
-        </div>
-      </div>
-    </section>
-
     <!-- Slide 15: Call to Action -->
     <section class="slide" id="slide-15">
       <div class="slide-content">
@@ -1817,7 +1745,7 @@ export class UsersService {
             </div>
             <h3 class="card-title-dark">Remember</h3>
             <p class="card-text-dark">
-              AI is here to accelerate, not replace
+              AI is here to accelerate, not to replace
             </p>
           </div>
         </div>
@@ -1869,11 +1797,31 @@ export class UsersService {
                     </div>
                   </div>
                 </div>
-                <p class="text-2xl text-gray-800 mt-8">
+                <!-- <p class="text-2xl text-gray-800 mt-8">
                   International JavaScript Conference NYC 2025
-                </p>
+                </p> -->
+
+                <!-- Compact feedback section -->
+                <div class="mt-6 pt-6 border-t border-gray-300">
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <div class="md:col-span-2 text-left">
+                      <p class="text-2xl  text-black font-semibold mb-1">Rate this session</p>
+                      <a id="review-link" href="https://devm.io/reader/experience/devmio-ijs" class="text-green-700 underline text-xl">devm.io/reader/experience/devmio-ijs</a>
+                    </div>
+                    <div class="flex justify-center">
+                      <div class="bg-white p-2 rounded shadow">
+                        <div id="review-qr" style="width: 100px; height: 100px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+
+    <!-- QRCode generator library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
           </div>
         </div>
       </div>
@@ -2209,6 +2157,8 @@ export class UsersService {
         // VS Code Live Preview integration
         getDeepLink(slideNumber) {
           const baseUrl = window.location.origin + window.location.pathname;
+
+
           return `${baseUrl}#slide-${slideNumber + 1}`;
         }
 
@@ -2227,6 +2177,33 @@ export class UsersService {
       window.presentation = presentation;
       window.goToSlide = slideNumber => presentation.goToSlide(slideNumber - 1);
       window.copyCurrentSlideLink = () => presentation.copySlideLink();
+
+      // Build day-of review QR/link with simple override
+      (function initReviewQR() {
+        const params = new URLSearchParams(window.location.search);
+        const DEFAULT_REVIEW_URL = 'https://devm.io/reader/experience/devmio-ijs';
+        const url = params.get('reviewUrl') || DEFAULT_REVIEW_URL;
+
+        const linkEl = document.getElementById('review-link');
+        const qrEl = document.getElementById('review-qr');
+
+        if (linkEl) {
+          linkEl.href = url;
+          linkEl.textContent = url.replace(/^https?:\/\//, '');
+        }
+        if (qrEl && window.QRCode) {
+          const QR_SIZE = 100;
+          new QRCode(qrEl, {
+            text: url,
+            width: QR_SIZE,
+            height: QR_SIZE,
+            colorDark: '#1a1a1a',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+        }
+      })();
+
     </script>
   </body>
 </html>
