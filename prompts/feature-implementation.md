@@ -2,65 +2,82 @@
 
 ## Context
 
-GitHub Issue: "Add `/profile` endpoint to return the logged-in user's profile details"
+GitHub Issue #2: "Add GET `/users/:id/posts` endpoint to retrieve all posts for a specific user"
 
 ## AI Prompt for Live Demo (with MCP)
 
 ```
-You are connected to this project via MCP. I need you to implement a complete feature based on this GitHub issue:
+You are connected to this project via MCP. I need you to implement a complete feature based on GitHub Issue #2:
 
-**Issue**: Add `/profile` endpoint to return authenticated user's profile
+**Issue**: Add GET `/users/:id/posts` endpoint to retrieve all posts for a specific user
 
 **Requirements**:
-1. **Create a new controller** with GET `/profile` endpoint
-2. **Return user profile data**: id, name, email, createdAt, lastLoginAt
+1. **Create endpoint** GET `/users/:id/posts`
+2. **Return user posts with user information**:
+   - user: { id, name, email }
+   - posts: [{ id, title, content, createdAt }]
+   - totalPosts: number
 3. **Add proper DTOs** for the response
-4. **Include authentication guard** (mock for demo)
+4. **Error handling**:
+   - Return 404 if user not found
+   - Return 400 for invalid user ID format
 5. **Write comprehensive tests**:
-   - Unit tests for the controller
-   - Unit tests for any new service methods
+   - E2E tests (already exist in `src/users-posts.e2e.spec.ts` - make them pass!)
+   - Unit tests for controller and service
    - Mock all dependencies properly
-6. **Add Swagger documentation** (OpenAPI spec via annotations or yaml/json)
-7. **Follow our existing patterns** from the users module
+6. **Add Swagger documentation** (OpenAPI spec)
+7. **Follow existing patterns** from the users and posts modules
 
 **Implementation Steps**:
-1. Create `ProfileController` in `src/controllers/`
-2. Create `ProfileResponseDto` in appropriate DTO folder
-3. Add `getProfile()` method to existing `UsersService`
-4. Create comprehensive test files
+1. Create `UsersController` in `src/modern/users/`
+2. Create `UserPostsResponseDto` in `src/modern/users/dto/`
+3. Create or update `UsersService` with `getUserPosts()` method
+4. Wire up the route in `src/main.ts`
 5. Add proper error handling for edge cases
-6. Wire routes and exports as needed (no framework-specific modules)
+6. Update Swagger spec in `src/main.ts`
 
 **Code Standards**:
 - Use TypeScript strict mode
 - Follow Node.js/Express best practices
-- Use proper HTTP status codes
+- Use proper HTTP status codes (200, 400, 404)
 - Include comprehensive error handling
-- Add input validation where needed
-- Use dependency injection properly
+- Add input validation for user ID
+- Use dependency injection where appropriate
+- Follow SOLID principles
 
-After implementation, create a new branch `feature/profile-endpoint`, commit the changes with a descriptive message, and prepare for a pull request.
+**Existing Code to Reference**:
+- User entity: `src/modern/users/entities/user.entity.ts`
+- Post entity: `src/modern/posts/entities/post.entity.ts`
+- Existing DTOs: `src/modern/users/dto/`
+
+**Tests to Make Pass**:
+The E2E tests in `src/users-posts.e2e.spec.ts` are currently failing. Your implementation should make all 3 tests pass:
+1. Returns user posts with user information
+2. Returns 404 for non-existent user
+3. Returns 400 for invalid user ID format
 ```
 
 ## Expected Outcome
 
-- New ProfileController with GET /profile endpoint
-- ProfileResponseDto with proper validation
-- Updated UsersService with getProfile method
+- New UsersController with GET `/users/:id/posts` endpoint
+- UserPostsResponseDto with proper validation
+- UsersService with `getUserPosts()` method
+- All E2E tests passing
 - Comprehensive test coverage
-- Swagger documentation
+- Swagger documentation updated
 - Ready for code review
 
 ## Demo Flow
 
-1. Show the GitHub issue
-2. Paste the prompt into MCP-enabled AI
-3. Watch AI generate all files
-4. Review the generated code:
+1. **Show the GitHub issue** (#2)
+2. **Show the failing tests**: `npm run test:e2e`
+3. **Paste the prompt** into MCP-enabled AI
+4. **Watch AI generate** all files:
    - Controller implementation
    - DTO definitions
-   - Service updates
-   - Test files
+   - Service implementation
+   - Route wiring
    - Swagger docs
-5. Show how AI follows existing patterns
-6. Demonstrate running the tests
+5. **Show how AI follows** existing patterns from users/posts modules
+6. **Run tests again**: `npm run test:e2e` - all passing!
+7. **Test the endpoint**: `curl http://localhost:3000/users/user-123/posts`

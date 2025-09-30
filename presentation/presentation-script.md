@@ -294,29 +294,51 @@ usersRouter.get('/:id', async (req, res) => {
 
 ## **DEMO 2: TDD ACCELERATION** _(20:00-26:00)_
 
-### Demo Script:
+### Slide Interaction:
 
-**TDD Setup** _(1 minute)_
-"I'm going to build a Node.js service using Test-Driven Development, but with AI acceleration. We'll follow Red-Green-Refactor, but AI will help with test generation and implementation."
+**Initial View** _(30 seconds)_
+"This slide shows our TDD workflow. On the left, we have the RED phase - failing tests. On the right, the GREEN phase - AI implementation. Let me show you what's inside."
 
-**Feature Requirements** _(30 seconds)_
-"Building a user authentication service with JWT tokens, password hashing, and rate limiting."
+**Click RED Panel** _(1 minute)_
+"Click the left panel to reveal our GitHub Issue #2 and the failing test. Notice we have:
+- A real GitHub issue requesting a new endpoint: GET /users/:id/posts
+- E2E tests already written following TDD principles
+- Test results showing 2 failed, 1 passed - the endpoint doesn't exist yet
+This is the RED phase - we have failing tests that define our requirements."
 
-**Red Phase - AI-Generated Tests** _(2 minutes)_
+**Click GREEN Panel** _(1 minute)_
+"Now click the right panel to see what AI generates. The AI:
+- Reads the GitHub issue
+- Understands our existing codebase patterns through MCP
+- Generates the controller, service, DTOs, and routes
+- All tests now pass - 3 passed, 0 failed
+This is the GREEN phase - AI implements exactly what the tests require."
 
-**Prompt for Test Generation:**
-"Generate comprehensive Jest tests for a Node.js authentication service with the following requirements:
+### Live Demo Script:
 
-- User registration with email/password
-- Password hashing with bcrypt
-- JWT token generation and validation
-- Rate limiting for login attempts
-- Input validation for email format and password strength
-- Error handling for duplicate users and invalid credentials
+**Setup** _(30 seconds)_
+"Now let's see this in action. I have GitHub Issue #2 open, and I've already written the E2E tests. Let's run them to see the RED phase."
 
-Include edge cases, mocking strategies for external dependencies, and both unit and integration test examples."
+**Show Failing Tests** _(1 minute)_
+```bash
+npm run test:e2e
+```
+"As you can see, 2 out of 3 tests are failing because the endpoint doesn't exist. This is proper TDD - write the test first."
 
-**Show Generated Tests:**
+**AI Implementation** _(2 minutes)_
+"Now I'll paste this prompt into my AI assistant with MCP connection:"
+
+**Prompt:**
+"You are connected to this project via MCP. Implement GitHub Issue #2: Add GET /users/:id/posts endpoint.
+
+Requirements from the failing tests:
+- Return user posts with user information
+- Return 404 if user not found
+- Return 400 for invalid user ID format
+
+Follow existing patterns from the users and posts modules. Make all E2E tests pass."
+
+**Show AI Generation:**
 
 ```javascript
 describe('AuthService', () => {
@@ -348,11 +370,30 @@ describe('AuthService', () => {
 - Adds JWT token logic
 - Includes rate limiting middleware
 
-**Refactor Phase - AI Optimization** _(30 seconds)_
-"AI suggests optimizations: better error messages, security improvements, performance enhancements."
+**Watch AI Generate** _(1.5 minutes)_
+"Watch as AI generates:
+1. UsersController with the getUserPosts method
+2. UsersService with proper error handling
+3. UserPostsResponseDto for type safety
+4. Route wiring in main.ts
+5. Swagger documentation updates
+
+Notice how it follows our existing patterns - same structure as the users module, same error handling approach."
+
+**Run Tests Again** _(30 seconds)_
+```bash
+npm run test:e2e
+```
+"And now all tests pass! 3 passed, 0 failed. That's the GREEN phase complete."
+
+**Test the Endpoint** _(30 seconds)_
+```bash
+curl http://localhost:3000/users/user-123/posts
+```
+"Perfect! We get user information and their posts, exactly as specified in the test."
 
 **Key Metrics** _(30 seconds)_
-"Traditional TDD for this feature: 4-5 hours. With AI assistance: 45 minutes. 90% time savings while maintaining test coverage and code quality."
+"Traditional approach for this feature: 2-3 hours of coding and testing. With AI + TDD: 7 minutes from failing test to working endpoint. That's a 95% time savings while maintaining test coverage and code quality."
 
 **Audience Interaction:**
 "How many of you practice TDD regularly? What's your biggest challenge with test writing?"

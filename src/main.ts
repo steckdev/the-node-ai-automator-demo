@@ -11,36 +11,13 @@ const openApiSpec = {
     description: 'Demo API for AI-Accelerated Node.js Development presentation',
     version: '1.0.0',
   },
-  paths: {
-    '/profile': {
-      get: {
-        summary: 'Get current user profile',
-        responses: {
-          '200': {
-            description: 'Profile returned',
-          },
-        },
-      },
-    },
-  },
+  paths: {},
 } as const;
 
 export function createApp() {
   const app = express();
   app.use(cors());
   app.use(express.json());
-
-  // Simple demo endpoint used by the presentation scripts
-  app.get('/profile', (_req, res) => {
-    const nowIso = new Date().toISOString();
-    res.json({
-      id: 'demo-user',
-      name: 'Demo User',
-      email: 'demo@example.com',
-      createdAt: nowIso,
-      lastLoginAt: nowIso,
-    });
-  });
 
   // Swagger UI mounted at /api
   app.use('/api', swaggerUi.serve, swaggerUi.setup(openApiSpec as any));

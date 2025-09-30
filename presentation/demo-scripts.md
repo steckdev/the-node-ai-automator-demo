@@ -219,268 +219,180 @@ npm test users.controller.spec.ts
 
 ---
 
-## **DEMO 2: TDD ACCELERATION** _(6 minutes)_
+## **DEMO 2: TDD ACCELERATION** _(7 minutes)_
 
 ### Pre-Demo Setup:
 
-- Clean Node.js project with Jest configured
-- AI tool ready for test generation
+- Node.js project with Jest and E2E tests configured
+- GitHub Issue #2 created and open in browser
+- AI tool with MCP connection ready
 - Terminal for running tests
+- `src/users-posts.e2e.spec.ts` file with failing tests
+
+### **SLIDE INTERACTION:** _(1.5 minutes)_
+
+#### **Show Slide 10 - Demo 2**
+
+**Say to audience:**
+"This slide shows our TDD workflow. Let me show you what's inside each phase."
+
+**Click RED Panel (left side):**
+"Here's the RED phase - we have GitHub Issue #2 requesting a new endpoint: GET /users/:id/posts. I've already written E2E tests following TDD principles. Notice the test expectations and the failing result - 2 failed, 1 passed. The endpoint doesn't exist yet."
+
+**Click GREEN Panel (right side):**
+"And here's what AI will generate in the GREEN phase - a complete controller, service layer, and all tests passing. Let's see this live."
 
 ### **LIVE DEMO SCRIPT:**
 
-#### **Step 1: Feature Requirements** _(30 seconds)_
+#### **Step 1: Show GitHub Issue** _(30 seconds)_
+
+**Open GitHub Issue #2 in browser:**
 
 **Say to audience:**
-"We're building an authentication service. I'll use TDD, but AI will accelerate both test writing and implementation."
+"Here's our real GitHub issue. It describes the feature we need: an endpoint that returns a user's posts along with their information. This is our requirement document."
 
-**Requirements on screen:**
+**Show issue details:**
+- Title: "Feature: Add GET /users/:id/posts endpoint"
+- Requirements: Return user posts with user info, handle 404 and 400 errors
+- Labels: enhancement, demo, tdd
 
-- User registration with email/password
-- JWT token generation
-- Password hashing with bcrypt
-- Rate limiting for login attempts
-- Input validation
+#### **Step 2: Show Failing Tests (RED Phase)** _(1 minute)_
 
-#### **Step 2: AI Test Generation** _(2 minutes)_
+**Open `src/users-posts.e2e.spec.ts` in editor:**
+
+**Say to audience:**
+"I've already written the E2E tests. This is proper TDD - write the test first. Let's run them."
+
+**Run in terminal:**
+```bash
+npm run test:e2e
+```
+
+**Point out the results:**
+"See? 2 failed, 1 passed. The endpoint doesn't exist, so we're in the RED phase. This is exactly where we want to be for TDD."
+
+#### **Step 3: AI Implementation (GREEN Phase)** _(2.5 minutes)_
+
+**Open AI assistant with MCP connection:**
+
+**Say to audience:**
+"Now I'll ask AI to implement this feature. The key is that AI has MCP access to our codebase, so it understands our existing patterns."
 
 **Show this prompt:**
 
 ```
-Generate comprehensive Jest tests for a Node.js AuthService class with these methods:
+You are connected to this project via MCP. Implement GitHub Issue #2:
+Add GET /users/:id/posts endpoint.
 
-1. registerUser(email, password) - Creates new user account
-2. loginUser(email, password) - Authenticates and returns JWT
-3. validateToken(token) - Verifies JWT token
-4. hashPassword(password) - Hashes password with bcrypt
+Requirements from the failing E2E tests:
+- Return user posts with user information (id, name, email)
+- Return posts array with id, title, content, createdAt
+- Return totalPosts count
+- Return 404 if user not found
+- Return 400 for invalid user ID format
 
-REQUIREMENTS:
-- Include edge cases and error scenarios
-- Mock external dependencies (database, bcrypt, jwt)
-- Test input validation (email format, password strength)
-- Test rate limiting behavior
-- Use Jest with TypeScript
-- Include both unit and integration test examples
-- Follow AAA pattern (Arrange, Act, Assert)
-
-CONTEXT:
-- Using PostgreSQL with TypeORM
-- JWT tokens expire in 24 hours
-- Passwords must be 8+ characters with special chars
-- Rate limit: 5 login attempts per 15 minutes per IP
+Follow existing patterns from the users and posts modules.
+Make all E2E tests in src/users-posts.e2e.spec.ts pass.
 ```
 
-**Show AI generating tests:**
+**Watch AI generate code:**
 
-```typescript
-// auth.service.spec.ts (framework-agnostic)
-describe('AuthService', () => {
-  let authService: AuthService;
-  let userRepository: any;
-  let jwtService: any;
-  let rateLimitService: any;
+**Say to audience:**
+"Watch as AI generates the implementation. It's reading our existing codebase patterns through MCP and following them."
 
-  beforeEach(() => {
-    userRepository = { findByEmail: jest.fn(), create: jest.fn() };
-    jwtService = { sign: jest.fn() };
-    rateLimitService = { checkLimit: jest.fn(), recordFailedAttempt: jest.fn() };
-    authService = new AuthService(userRepository, jwtService, rateLimitService);
-  });
+**AI generates:**
+1. `src/modern/users/users.controller.ts` - Controller with getUserPosts method
+2. `src/modern/users/users.service.ts` - Service layer with business logic
+3. `src/modern/users/dto/user-posts-response.dto.ts` - Type-safe response DTO
+4. Updates `src/main.ts` - Wires up the route
+5. Updates OpenAPI spec - Adds Swagger documentation
 
-  describe('registerUser', () => {
-    it('should successfully register a new user', async () => {
-      // Arrange
-      const email = 'test@example.com';
-      const password = 'SecurePass123!';
-      const hashedPassword = 'hashed_password';
+**Point out key patterns:**
+"Notice how AI followed our existing patterns:
+- Same error handling as other controllers
+- Same DTO structure as posts module
+- Same service injection pattern
+- Consistent with our TypeScript strict mode"
 
-      userRepository.findByEmail.mockResolvedValue(null);
-      userRepository.create.mockResolvedValue({ id: 1, email, password: hashedPassword });
+#### **Step 4: Run Tests Again (GREEN Phase)** _(1 minute)_
 
-      // Act
-      const result = await authService.registerUser(email, password);
-
-      // Assert
-      expect(result).toEqual({ id: 1, email });
-      expect(userRepository.findByEmail).toHaveBeenCalledWith(email);
-      expect(userRepository.create).toHaveBeenCalledWith({
-        email,
-        password: expect.any(String),
-      });
-    });
-
-    it('should reject duplicate email addresses', async () => {
-      // Arrange
-      const email = 'existing@example.com';
-      userRepository.findByEmail.mockResolvedValue({ id: 1, email });
-
-      // Act & Assert
-      await expect(authService.registerUser(email, 'password')).rejects.toThrow(
-        'Email already registered',
-      );
-    });
-
-    it('should enforce password strength requirements', async () => {
-      // Arrange
-      const email = 'test@example.com';
-      const weakPassword = '123';
-
-      // Act & Assert
-      await expect(authService.registerUser(email, weakPassword)).rejects.toThrow(
-        'Password must be at least 8 characters',
-      );
-    });
-  });
-
-  describe('loginUser', () => {
-    it('should return JWT token for valid credentials', async () => {
-      // AI generates comprehensive login tests...
-    });
-
-    it('should enforce rate limiting', async () => {
-      // AI generates rate limiting tests...
-    });
-  });
-});
-```
-
-#### **Step 3: Run Tests (Red Phase)** _(30 seconds)_
-
-**Show terminal:**
-
+**Run in terminal:**
 ```bash
-npm test auth.service.spec.ts
-# All tests fail - Red phase complete
+npm run test:e2e
+```
+
+**Show results:**
+"And now all tests pass! 3 passed, 0 failed. We've completed the GREEN phase."
+
+**Test the actual endpoint:**
+```bash
+curl http://localhost:3000/users/user-123/posts | jq
+```
+
+**Show response:**
+```json
+{
+  "user": {
+    "id": "user-123",
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "posts": [
+    {
+      "id": "post-1",
+      "title": "My First Post",
+      "content": "Hello world!",
+      "createdAt": "2025-09-30T10:00:00.000Z"
+    }
+  ],
+  "totalPosts": 1
+}
 ```
 
 **Say to audience:**
-"Perfect! All tests fail as expected. Now let's implement the service."
+"Perfect! The endpoint works exactly as specified in the GitHub issue and tests."
 
-#### **Step 4: AI Implementation** _(2 minutes)_
+#### **Step 5: Show Generated Code** _(1 minute)_
 
-**Show implementation prompt:**
+**Open `src/modern/users/users.controller.ts`:**
 
-```
-Implement the AuthService class to pass these Jest tests:
-
-[Paste the generated tests]
-
-REQUIREMENTS:
-- Use bcrypt for password hashing (cost factor 12)
-- Use JWT with 24-hour expiration
-- Implement proper error handling with custom exceptions
-- Add input validation for email format and password strength
-- Integrate with rate limiting service
-- Use TypeORM for database operations
-- Include proper logging
-
-PATTERNS:
-- Follow dependency injection pattern
-- Use async/await throughout
-- Throw descriptive errors for different failure cases
-- Hash passwords before storing
-```
-
-**Show AI generating implementation:**
-
+**Highlight key sections:**
 ```typescript
-// auth.service.ts
-@Injectable()
-export class AuthService {
-  private readonly logger = new Logger(AuthService.name);
+// Controller method
+async getUserPosts(req: Request, res: Response) {
+  const userId = req.params.id;
 
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly jwtService: JwtService,
-    private readonly rateLimitService: RateLimitService,
-  ) {}
-
-  async registerUser(email: string, password: string): Promise<UserDto> {
-    // Validate input
-    if (!this.isValidEmail(email)) {
-      throw new BadRequestException('Invalid email format');
-    }
-
-    if (!this.isValidPassword(password)) {
-      throw new BadRequestException(
-        'Password must be at least 8 characters with special characters',
-      );
-    }
-
-    // Check if user exists
-    const existingUser = await this.userRepository.findByEmail(email);
-    if (existingUser) {
-      throw new ConflictException('Email already registered');
-    }
-
-    // Hash password and create user
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = await this.userRepository.create({
-      email,
-      password: hashedPassword,
-    });
-
-    this.logger.log(`User registered: ${email}`);
-
-    return { id: user.id, email: user.email };
+  if (!userId) {
+    return res.status(400).json({ error: 'Invalid user ID' });
   }
 
-  async loginUser(email: string, password: string, ipAddress: string): Promise<{ token: string }> {
-    // Check rate limiting
-    await this.rateLimitService.checkLimit(ipAddress);
-
-    const user = await this.userRepository.findByEmail(email);
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+  try {
+    const result = await this.usersService.getUserPosts(userId);
+    if (!result) {
+      return res.status(404).json({ error: 'User not found' });
     }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      await this.rateLimitService.recordFailedAttempt(ipAddress);
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    const token = this.jwtService.sign(
-      { userId: user.id, email: user.email },
-      { expiresIn: '24h' },
-    );
-
-    this.logger.log(`User logged in: ${email}`);
-    return { token };
-  }
-
-  private isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  private isValidPassword(password: string): boolean {
-    return password.length >= 8 && /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
   }
 }
 ```
 
-#### **Step 5: Run Tests (Green Phase)** _(30 seconds)_
-
-**Show terminal:**
-
-```bash
-npm test auth.service.spec.ts
-# All tests pass - Green phase complete!
-```
+**Say to audience:**
+"Notice the error handling - 400 for invalid input, 404 for not found, 500 for server errors. This matches our existing patterns perfectly."
 
 #### **Step 6: Key Metrics** _(30 seconds)_
 
 **Highlight the results:**
 
-- **Traditional TDD time**: 4-5 hours
-- **AI-accelerated time**: 45 minutes
-- **Test coverage**: 95%
-- **Lines of test code**: 200+ (would take 2 hours manually)
-- **Implementation time**: 15 minutes vs 2 hours
+- **Traditional approach**: 2-3 hours (write controller, service, DTOs, tests, docs)
+- **AI-accelerated time**: 7 minutes (from failing test to working endpoint)
+- **Time savings**: 95%
+- **Test coverage**: 100% (all E2E tests passing)
+- **Code quality**: Follows existing patterns, type-safe, documented
 
 **Say to audience:**
-"90% time savings while maintaining TDD discipline and achieving better test coverage than I typically write manually."
+"7 minutes from failing test to production-ready endpoint. That's a 95% time savings while maintaining TDD discipline and code quality."
 
 ---
 
@@ -716,7 +628,7 @@ const isValid = this.passwordValidator.validate(password, {
 ### **Overall Time Savings:**
 
 - **Demo 1 (Refactoring)**: 3 hours → 15 minutes (92% savings)
-- **Demo 2 (TDD)**: 5 hours → 45 minutes (85% savings)
+- **Demo 2 (TDD with GitHub Issue)**: 2-3 hours → 7 minutes (95% savings)
 - **Demo 3 (CI/CD)**: 3 days → 3 hours (87% savings)
 
 ### **Quality Improvements:**

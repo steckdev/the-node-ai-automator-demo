@@ -1284,7 +1284,7 @@ const NOT_FOUND = 404;
 const INTERNAL_ERROR = 500;
 
 class UsersRepository {
-  async findOneWithPosts(id: number): Promise<UserWithPosts | null> {
+  async findOneWithPosts(id: number): Promise&lt;UserWithPosts | null&gt; {
     // TODO: query database and join posts
     return null;
   }
@@ -1385,49 +1385,158 @@ app.get('/users/:id', async (req, res) => {
       <div class="slide-content">
         <h2 class="slide-title">Demo 2: TDD Acceleration in Node</h2>
         <p class="slide-subtitle">
-          Red > Green > Refactor with jest and focused prompts
+          Red > Green > Refactor with Jest and focused prompts
         </p>
 
-        <div class="content-grid grid-4">
-          <div class="card-solid">
-            <div class="card-icon card-icon-primary">
-              <i class="fab fa-js-square"></i>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          <!-- RED Phase: GitHub Issue & Failing Tests -->
+          <div class="glass-strong p-8 interactive-demo" id="tdd-red-demo">
+            <div class="demo-label">Click to view details</div>
+            <h3 class="text-2xl font-bold text-red-300 mb-6">
+              RED: Failing Tests
+            </h3>
+            <div class="space-y-4" id="tdd-red-content">
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                  <i class="fab fa-github mr-2"></i>GitHub Issue #2
+                </h4>
+                <p class="card-text-dark">Feature: Add GET /users/:id/posts endpoint</p>
+              </div>
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                 E2E Tests Written
+                </h4>
+                <p class="card-text-dark">3 tests: user posts, 404, 400 validation</p>
+              </div>
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                  Tests Failing
+                </h4>
+                2 failed, 1 passed - endpoint doesn't exist</p>
+              </div>
             </div>
-            <h3 class="card-title-dark">TypeScript-First</h3>
-            <p class="card-text-dark">
-              Better type inference for accurate AI suggestions
-            </p>
+            <div class="code-example" id="tdd-red-code" style="display: none;">
+              <pre><code class="language-typescript">// GitHub Issue #2: Add GET /users/:id/posts endpoint
+// Requirements:
+// - Return user posts with user information
+// - Return 404 if user not found
+// - Return 400 for invalid user ID format
+
+// E2E Test (FAILING)
+describe('GET /users/:id/posts (e2e)', () => {
+  it('returns user posts with user information', async () => {
+    const res = await request(server)
+      .get('/users/user-123/posts')
+      .expect(200);
+
+    expect(res.body).toEqual(
+      expect.objectContaining({
+        user: expect.objectContaining({
+          id: expect.any(String),
+          name: expect.any(String),
+          email: expect.stringMatching(/@/),
+        }),
+        posts: expect.arrayContaining([
+          expect.objectContaining({
+            id: expect.any(String),
+            title: expect.any(String),
+            content: expect.any(String),
+            createdAt: expect.any(String),
+          }),
+        ]),
+        totalPosts: expect.any(Number),
+      }),
+    );
+  });
+});
+
+// Test Result: ❌ FAIL
+// expected 200 "OK", got 404 "Not Found"</code></pre>
+            </div>
           </div>
 
-          <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-cubes"></i>
+          <!-- GREEN Phase: AI Implementation -->
+          <div class="glass-strong p-8 interactive-demo" id="tdd-green-demo">
+            <div class="demo-label">Click to view implementation</div>
+            <h3 class="text-2xl font-bold text-green-300 mb-6">
+              GREEN: Passing Tests
+            </h3>
+            <div class="space-y-4" id="tdd-green-content">
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                  <i class="fas fa-robot mr-2"></i>AI with MCP
+                </h4>
+                <p class="card-text-dark">Reads issue, understands codebase patterns</p>
+              </div>
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                  Generates Code
+                </h4>
+                <p class="card-text-dark">Controller, service, DTOs, routes, Swagger</p>
+              </div>
+              <div class="card-solid">
+                <h4 class="card-title-dark">
+                  Tests Pass
+                </h4>
+                <p class="card-text-dark">3 passed, 0 failed - feature implemented!</p>
+              </div>
             </div>
-            <h3 class="card-title-dark">Modular Design</h3>
-            <p class="card-text-dark">
-              Smaller context windows for better AI understanding
-            </p>
-          </div>
+            <div class="code-example code-example-right" id="tdd-green-code" style="display: none;">
+              <pre><code class="language-typescript">// AI-Generated Implementation
 
-          <div class="card-solid">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-sitemap"></i>
-            </div>
-            <h3 class="card-title-dark">Domain Separation</h3>
-            <p class="card-text-dark">
-              Clear boundaries for relevant AI suggestions
-            </p>
-          </div>
+// 1. Controller
+class UsersController {
+  async getUserPosts(req: Request, res: Response) {
+    const userId = req.params.id;
 
-          <div class="card-solid">
-            <div class="card-icon card-icon-accent">
-              <i class="fas fa-check-double"></i>
+    if (!userId) {
+      return res.status(400).json({ error: 'Invalid user ID' });
+    }
+
+    try {
+      const result = await this.usersService.getUserPosts(userId);
+      if (!result) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+}
+
+// 2. Service
+class UsersService {
+  async getUserPosts(userId: string): Promise&lt;UserPostsResponse | null&gt; {
+    const user = await this.userRepo.findById(userId);
+    if (!user) return null;
+
+    const posts = await this.postRepo.findByUserId(userId);
+
+    return {
+      user: { id: user.id, name: user.name, email: user.email },
+      posts: posts.map(p => ({
+        id: p.id,
+        title: p.title,
+        content: p.content,
+        createdAt: p.createdAt.toISOString(),
+      })),
+      totalPosts: posts.length,
+    };
+  }
+}
+
+// Test Result: ✅ PASS
+// 3 passed, 0 failed</code></pre>
             </div>
-            <h3 class="card-title-dark">Consistent Linting</h3>
-            <p class="card-text-dark">
-              Predictable formatting for clean AI code
-            </p>
           </div>
+        </div>
+
+        <div class="card-solid p-4 mt-8">
+          <p class="text-lg text-center text-black">
+            <i class="fas fa-lightbulb text-yellow-600 mr-3"></i>
+            Write failing test → AI implements → Tests pass → Refactor with confidence
+          </p>
         </div>
       </div>
     </section>
@@ -1983,6 +2092,8 @@ app.get('/users/:id', async (req, res) => {
         setupInteractiveDemos() {
           const beforeDemo = document.getElementById("before-demo");
           const afterDemo = document.getElementById("after-demo");
+          const tddRedDemo = document.getElementById("tdd-red-demo");
+          const tddGreenDemo = document.getElementById("tdd-green-demo");
           const showExamplesBtn = document.getElementById("show-examples-btn");
           const hideExamplesBtn = document.getElementById("hide-examples-btn");
 
@@ -1995,6 +2106,18 @@ app.get('/users/:id', async (req, res) => {
           if (afterDemo) {
             afterDemo.addEventListener("click", () => {
               this.toggleCodeExample("after");
+            });
+          }
+
+          if (tddRedDemo) {
+            tddRedDemo.addEventListener("click", () => {
+              this.toggleCodeExample("tdd-red");
+            });
+          }
+
+          if (tddGreenDemo) {
+            tddGreenDemo.addEventListener("click", () => {
+              this.toggleCodeExample("tdd-green");
             });
           }
 
