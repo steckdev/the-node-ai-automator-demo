@@ -1,7 +1,6 @@
 ---
-type: auto
-title: Refactor Guidelines
-description: Apply when refactoring legacy/messy code, removing callback hell, magic numbers, or inconsistent error handling. Keep behavior identical and improve structure.
+type: "agent_requested"
+description: "Apply when refactoring legacy/messy code, removing callback hell, magic numbers, or inconsistent error handling. Keep behavior identical and improve structure."
 ---
 
 - Preserve external behavior and API; write/augment safety tests before and after

@@ -180,7 +180,7 @@
 
 
       .slide-content {
-        max-width: 1200px;
+        max-width: 1600px;
         width: 100%;
         text-align: center;
         color: white;
@@ -348,7 +348,7 @@
         gap: 1.5rem; /* Reduced gap to prevent overflow */
         margin-top: 3rem;
         max-width: 100%;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
 
       .content-grid.grid-2 {
@@ -706,7 +706,7 @@
     <!-- Slide 1: Title Slide -->
     <section class="slide active" id="slide-1">
       <div class="slide-content max-w-7xl" >
-        <div class="glass-strong  p-12 floating">
+        <div class="glass-strong  p-12">
           <div class="flex items-center justify-center gap-6 mb-8">
             <div class="text-9xl">
               <i class="fab fa-node-js text-green-400"></i>
@@ -739,6 +739,7 @@
       </div>
     </section>
 
+    <!-- Slide 2: About Us -->
 <section class="slide" id="slide-2">
       <div class="slide-content">
         <h2 class="slide-title">About Us</h2>
@@ -777,10 +778,10 @@
     </section>
 
 
-    <!-- Slide 3: Why This Session Matters -->
+    <!-- Slide 3: Typical Node.js Initiatives -->
     <section class="slide" id="slide-3">
       <div class="slide-content">
-        <h2 class="slide-title">The Node.js Initiatives</h2>
+        <h2 class="slide-title">Typical Node.js Initiatives</h2>
         <p class="slide-subtitle">
           Manual, repetitive tasks that consume weeks of developer time
         </p>
@@ -887,58 +888,6 @@
       </div>
     </section>
 
-    <!-- Slide 4: AI Isn't Magic - The Pitfalls -->
-    <section class="slide-archived" id="slide-4">
-      <div class="slide-content">
-        <h2 class="slide-title">AI Isn't Magic – The Pitfalls</h2>
-        <p class="slide-subtitle">
-          Understanding the limitations and risks of AI-assisted development
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-green-300 mb-4">
-              <i class="fas fa-magic mr-3"></i>AI Power
-            </h3>
-            <div class="space-y-4">
-              <div class="card-solid">
-                <p class="card-text-dark">✨ Rapid code generation</p>
-              </div>
-              <div class="card-solid">
-                <p class="card-text-dark">🚀 Pattern recognition</p>
-              </div>
-              <div class="card-solid">
-                <p class="card-text-dark">⚡ Productivity boost</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass-strong p-8">
-            <h3 class="text-2xl font-bold text-red-300 mb-4">
-              <i class="fas fa-exclamation-triangle mr-3"></i>AI Dangers
-            </h3>
-            <div class="space-y-4">
-              <div class="card-solid">
-                <h4 class="card-title-dark text-red-600">Hallucinations</h4>
-                <p class="card-text-dark">Wrong code that looks right</p>
-              </div>
-              <div class="card-solid">
-                <h4 class="card-title-dark text-red-600">Overconfidence</h4>
-                <p class="card-text-dark">Skipping code reviews</p>
-              </div>
-              <div class="card-solid">
-                <h4 class="card-title-dark text-red-600">Context Loss</h4>
-                <p class="card-text-dark">Struggles in large monoliths</p>
-              </div>
-              <div class="card-solid">
-                <h4 class="card-title-dark text-red-600">Security Risks</h4>
-                <p class="card-text-dark">Secrets or unsafe snippets</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Slide 5: Key Principle -->
     <section class="slide" id="slide-5">
@@ -1325,63 +1274,8 @@ app.get('/users/:id', async (req, res) => {
       </div>
     </section>
 
-    <!-- Slide 8: AI for Testing & Documentation -->
-    <section class="slide" id="slide-9">
-      <div class="slide-content">
-        <h2 class="slide-title">Docs-as-Code in Node</h2>
-        <p class="slide-subtitle">
-          Swagger/OpenAPI, READMEs, ADRs - generated and kept in sync
-        </p>
-
-        <div class="content-grid grid-4">
-          <div class="card-solid">
-            <div class="card-icon card-icon-primary">
-              <i class="fas fa-vial"></i>
-            </div>
-            <h3 class="card-title-dark">Jest Unit Tests</h3>
-            <p class="card-text-dark">
-              Auto-generate test suites with edge cases and mocking
-              <!-- <br><small class="text-green-600">🔧 Tools: GitHub Copilot, Augment</small> -->
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-book-open"></i>
-            </div>
-            <h3 class="card-title-dark">API Documentation</h3>
-            <p class="card-text-dark">
-              Create Swagger/OpenAPI docs automatically from your code
-              <!-- <br><small class="text-green-600">📚 Tools: Copilot Chat, Augment</small> -->
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-comments"></i>
-            </div>
-            <h3 class="card-title-dark">Inline Comments</h3>
-            <p class="card-text-dark">
-              Generate meaningful comments for complex business logic
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-warning">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <h3 class="card-title-dark">Always Review</h3>
-            <p class="card-text-dark">
-              Generated content still should receive human validation
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- Slide 9: Node.js Practices AI Works Well With -->
-    <section class="slide" id="slide-10">
+    <section class="slide" id="slide-9">
       <div class="slide-content">
         <h2 class="slide-title">Demo 2: TDD Acceleration in Node</h2>
         <p class="slide-subtitle">
@@ -1393,7 +1287,7 @@ app.get('/users/:id', async (req, res) => {
           <div class="glass-strong p-8 interactive-demo" id="tdd-red-demo">
             <div class="demo-label">Click to view details</div>
             <h3 class="text-2xl font-bold text-red-300 mb-6">
-              RED: Failing Tests
+              <i class="fas fa-exclamation-triangle mr-3"></i>Failing Tests
             </h3>
             <div class="space-y-4" id="tdd-red-content">
               <div class="card-solid">
@@ -1459,7 +1353,7 @@ describe('GET /users/:id/posts (e2e)', () => {
           <div class="glass-strong p-8 interactive-demo" id="tdd-green-demo">
             <div class="demo-label">Click to view implementation</div>
             <h3 class="text-2xl font-bold text-green-300 mb-6">
-              GREEN: Passing Tests
+              <i class="fas fa-check-circle mr-3"></i>Passing Tests
             </h3>
             <div class="space-y-4" id="tdd-green-content">
               <div class="card-solid">
@@ -1543,7 +1437,7 @@ class UsersService {
 
 
     <!-- Slide 10: AI in CI/CD Workflows -->
-    <section class="slide" id="slide-11">
+    <section class="slide" id="slide-10">
       <div class="slide-content">
         <h2 class="slide-title">Demo 3: CI/CD + Copilot PR Review</h2>
         <p class="slide-subtitle">
@@ -1650,65 +1544,8 @@ class UsersService {
       </div>
     </section>
 
-    <!-- Slide 12: For Leaders -->
-    <section class="slide-archived" id="slide-12">
-      <div class="slide-content">
-        <h2 class="slide-title">For Leaders</h2>
-        <p class="slide-subtitle">
-          The business impact of AI-accelerated development
-        </p>
 
-        <div class="content-grid grid-4">
-          <div class="card-solid">
-            <div class="card-icon card-icon-primary">
-              <i class="fas fa-tachometer-alt"></i>
-            </div>
-            <h3 class="card-title-dark">Speed Without Sacrifice</h3>
-            <p class="card-text-dark">
-              Faster delivery while maintaining quality
-              <!-- <br><small class="text-green-600">📊 30-50% faster development cycles</small> -->
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-secondary">
-              <i class="fas fa-users"></i>
-            </div>
-            <h3 class="card-title-dark">Team Consistency</h3>
-            <p class="card-text-dark">
-              Standardized patterns across all projects
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-tertiary">
-              <i class="fas fa-shipping-fast"></i>
-            </div>
-            <h3 class="card-title-dark">Faster Features</h3>
-
-
-            <p class="card-text-dark">
-              Accelerated delivery and reduced time-to-market
-            </p>
-          </div>
-
-          <div class="card-solid">
-            <div class="card-icon card-icon-accent">
-              <i class="fas fa-heart"></i>
-            </div>
-            <h3 class="card-title-dark">Better Morale</h3>
-            <p class="card-text-dark">
-              Improved satisfaction through reduced tedious work
-              <!-- <br><small class="text-green-600">💝 25% improvement in satisfaction</small> -->
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 13: Business Implementation Strategy -->
-
-    <!-- Pitfalls: Place after Demo 3 -->
+    <!-- Slide 12: Business Implementation Strategy -->
     <section class="slide" id="slide-12">
       <div class="slide-content">
         <h2 class="slide-title">AI Isn't Magic - The Pitfalls</h2>
@@ -1809,8 +1646,8 @@ class UsersService {
       </div>
     </section>
 
-    <!-- Slide 15: Call to Action -->
-    <section class="slide" id="slide-15">
+    <!-- Slide 14: Call to Action -->
+    <section class="slide" id="slide-14">
       <div class="slide-content">
         <h2 class="slide-title">Call to Action</h2>
         <p class="slide-subtitle">
@@ -1861,8 +1698,8 @@ class UsersService {
       </div>
     </section>
 
-    <!-- Slide 16: Thank You -->
-    <section class="slide" id="slide-16">
+    <!-- Slide 15: Thank You -->
+    <section class="slide" id="slide-15">
       <div class="slide-content">
         <div class="slide-header">
           <h2 class="slide-title">Thank You!</h2>
@@ -1872,7 +1709,7 @@ class UsersService {
         <div class="slide-body">
           <div class="glass-strong p-12">
             <div class="card-icon text-center mb-8">
-              <i class="fas fa-heart text-9xl text-green-600 floating active"></i>
+              <i class="fas fa-heart text-9xl text-green-600 active"></i>
             </div>
 
             <div class="text-center">
@@ -1915,11 +1752,11 @@ class UsersService {
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                     <div class="md:col-span-2 text-left">
                       <p class="text-2xl  text-black font-semibold mb-1">Rate this session</p>
-                      <a id="review-link" href="https://devm.io/reader/experience/devmio-ijs" class="text-green-700 underline text-xl">devm.io/reader/experience/devmio-ijs</a>
+                      <a id="review-link" href="https://devm.io/reader/player/international-javascript-new-york-2025/accelerated-nodejs-development-ai" class="text-green-700 underline text-xl">devm.io/reader/player/international-javascript-new-york-2025/accelerated-nodejs-development-ai</a>
                     </div>
                     <div class="flex justify-center">
                       <div class="bg-white p-2 rounded shadow">
-                        <div id="review-qr" style="width: 100px; height: 100px;"></div>
+                        <div id="review-qr" style="width: 200px; height: 200px;"></div>
                       </div>
                     </div>
                   </div>
@@ -2304,7 +2141,7 @@ class UsersService {
       // Build day-of review QR/link with simple override
       (function initReviewQR() {
         const params = new URLSearchParams(window.location.search);
-        const DEFAULT_REVIEW_URL = 'https://devm.io/reader/experience/devmio-ijs';
+        const DEFAULT_REVIEW_URL = 'https://devm.io/reader/player/international-javascript-new-york-2025/accelerated-nodejs-development-ai';
         const url = params.get('reviewUrl') || DEFAULT_REVIEW_URL;
 
         const linkEl = document.getElementById('review-link');
@@ -2315,7 +2152,7 @@ class UsersService {
           linkEl.textContent = url.replace(/^https?:\/\//, '');
         }
         if (qrEl && window.QRCode) {
-          const QR_SIZE = 100;
+          const QR_SIZE = 200;
           new QRCode(qrEl, {
             text: url,
             width: QR_SIZE,
